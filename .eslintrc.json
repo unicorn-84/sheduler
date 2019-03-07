@@ -1,0 +1,24 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "extends": "airbnb-base",
+  "globals": {
+    "Atomics": false,
+    "SharedArrayBuffer": false
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "allowImportExportEverywhere": true
+  },
+  "rules": {
+    "linebreak-style": [
+      "error",
+      "windows"
+    ]
+  }
+}
