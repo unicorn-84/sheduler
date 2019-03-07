@@ -1,0 +1,26 @@
+{
+  "name": "sheduler",
+  "version": "0.0.0",
+  "description": "Расписание событий из json в html",
+  "private": true,
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unicorn-84/sheduler.git"
+  },
+  "keywords": [],
+  "author": "unicorn-84 <unicorn-84@ya.ru> (https://github.com/unicorn-84)",
+  "license": "GNU AGPLv3",
+  "bugs": {
+    "url": "https://github.com/unicorn-84/sheduler/issues"
+  },
+  "homepage": "https://github.com/unicorn-84/sheduler#readme",
+  "engines": {
+    "node": "11.10.0"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1% in RU",
+    "not dead"
+  ]
+}
