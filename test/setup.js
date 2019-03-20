@@ -15,7 +15,7 @@ function createWindow(string) {
   scriptEl.textContent = scheduler;
   body.appendChild(scriptEl);
   if (_.isString(string)) {
-    body.insertAdjacentHTML('afterBegin', string);
+    body.appendChild(JSDOM.fragment(string));
   }
   return [jsdom, window, document, body];
 }
