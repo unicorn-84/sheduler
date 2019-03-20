@@ -58,5 +58,8 @@
     "rollup-plugin-terser": "^4.0.4",
     "serve": "^10.1.2",
     "size-limit": "^0.21.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
   }
 }

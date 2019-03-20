@@ -1,15 +1,17 @@
 const { assert } = require('chai');
-const setupEnv = require('./setup');
+const createWindow = require('./setup');
 
-describe('scheduler.js', () => {
-  let window;
-  beforeEach(() => {
-    window = setupEnv();
-  });
-  it('должен быть свойством window', () => {
-    assert.exists(window.scheduler);
-  });
-  it('должен быть функцией', () => {
-    assert.isFunction(window.scheduler);
+describe('Sheduler', () => {
+  describe('src/main.js', () => {
+    let window;
+    beforeEach(() => {
+      [, window] = createWindow();
+    });
+    it('scheduler должен быть свойством window', () => {
+      assert.exists(window.scheduler);
+    });
+    it('scheduler должен быть функцией', () => {
+      assert.isFunction(window.scheduler);
+    });
   });
 });
