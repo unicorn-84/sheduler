@@ -2,8 +2,8 @@ const { assert } = require('chai');
 const _ = require('lodash');
 const createWindow = require('./setup');
 
-describe('Тестирование настройки JSDOM для тестов', () => {
-  describe('test/setup.js', () => {
+describe.skip('Тестирование настройки JSDOM для тестов', () => {
+  describe('#createWindow()', () => {
     let jsdom;
     let window;
     let document;
@@ -22,9 +22,6 @@ describe('Тестирование настройки JSDOM для тестов'
     });
     it('должен экспортировать body', () => {
       assert.exists(body);
-    });
-    it('body должен быть DOM элемент', () => {
-      assert.isTrue(_.isElement(document.getElementsByTagName('body')[0]));
     });
     it('должен быть определен sheduler', () => {
       assert.exists(window.scheduler);

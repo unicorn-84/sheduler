@@ -1,11 +1,11 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import babel from 'rollup-plugin-babel';
-import { terser } from 'rollup-plugin-terser';
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const babel = require('rollup-plugin-babel');
+const { terser } = require('rollup-plugin-terser');
 
 const production = process.env.NODE_ENV === 'production';
 
-export default [
+module.exports = [
   {
     input: 'src/main.js',
     output: {
