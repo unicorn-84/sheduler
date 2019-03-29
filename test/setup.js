@@ -1,23 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
-const _ = require('lodash');
 
 const production = process.env.NODE_ENV === 'production';
 const scheduler = fs.readFileSync(path.join(__dirname, production ? '../build/scheduler.min.js' : '../dev/scheduler.js'), { encoding: 'utf-8' });
 
-function createWindow(string) {
-  const jsdom = new JSDOM('<!doctype html><html><body></body></html>', { runScripts: 'dangerously' });
+function createWindow() {
+  const jsdom = new JSDOM('<!doctype html><html><body><div id="scheduler-container"></div></body></html>', { runScripts: 'dangerously' });
   const { window } = jsdom;
-  const { document } = window;
-  const { body } = document;
-  const scriptEl = document.createElement('script');
+  const scriptEl = window.document.createElement('script');
   scriptEl.textContent = scheduler;
-  body.appendChild(scriptEl);
-  if (_.isString(string)) {
-    body.appendChild(JSDOM.fragment(string));
-  }
-  return [jsdom, window, document, body];
+  window.document.body.appendChild(scriptEl);
+  return window;
 }
 
-module.exports = createWindow;
+export default createWindow;

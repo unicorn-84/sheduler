@@ -7,7 +7,7 @@ const production = process.env.NODE_ENV === 'production';
 
 module.exports = [
   {
-    input: 'src/main.js',
+    input: 'src/createSchedule.js',
     output: {
       name: 'scheduler',
       file: production ? 'build/scheduler.min.js' : 'dev/scheduler.js',

@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Scheduler</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Scheduler</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    #scheduler-container {
+      margin-top: 1rem;
+    }
+    #scheduler-container table {
+      table-layout: fixed;
+      width: 100%;
+      margin-bottom: 1rem;
+      border: 1px solid #555;
+      color: #555;
+      background-color: #fefefe;
+    }
+    #scheduler-container thead th:first-child {
+      width: 20%;
+    }
+    #scheduler-container th {
+      padding: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #555;
+    }
+  </style>
 </head>
 <body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="scheduler-container"></div>
+    </div>
+  </div>
+</div>
 <script src="scheduler.js"></script>
 <script>
   window.scheduler();
