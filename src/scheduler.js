@@ -7,6 +7,8 @@ function scheduler() {
   if (!container) {
     return;
   }
+  const mobile = window.matchMedia('(max-width: 991px)');
+  console.log(mobile.matches);
   container.appendChild(document.createElement('table'));
   // columns.forEach((column) => {
   //   const table = window.document.createElement('table');

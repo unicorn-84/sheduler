@@ -17,4 +17,16 @@ suite.skip('TESTING ENV', () => {
     window.scheduler();
     assert.exists(document.getElementById('scheduler-container'));
   });
+  test('matchMedia должно быть определено', () => {
+    assert.exists(window.matchMedia);
+  });
+  test('resizeTo должно быть определено', () => {
+    assert.exists(window.resizeTo);
+  });
+  test('resizeTo() должна изменять viewport', () => {
+    window.resizeTo(991);
+    assert.equal(window.innerWidth, 991);
+    window.resizeTo(575);
+    assert.equal(window.innerWidth, 575);
+  });
 });

@@ -1,3 +1,5 @@
+import matchMediaPolyfill from 'mq-polyfill';
+
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
@@ -11,6 +13,15 @@ function createWindow() {
   const scriptEl = window.document.createElement('script');
   scriptEl.textContent = scheduler;
   window.document.body.appendChild(scriptEl);
+  matchMediaPolyfill(window);
+  window.resizeTo = function resizeTo(width, height) {
+    Object.assign(this, {
+      innerWidth: width,
+      innerHeight: height,
+      outerWidth: width,
+      outerHeight: height,
+    }).dispatchEvent(new this.Event('resize'));
+  };
   global.window = window;
   global.document = window.document;
 }
