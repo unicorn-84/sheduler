@@ -1,3 +1,5 @@
 --colors
 --require @babel/register
 --sort
+--ui tdd
+--recursive
