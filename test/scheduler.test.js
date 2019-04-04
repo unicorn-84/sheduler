@@ -2,7 +2,9 @@ import { assert } from 'chai';
 import createWindow from './setup/setup';
 import createTable from '../src/createTable';
 import createMobileTables from '../src/createMobileTables';
-import { columns, rows, options } from '../src/options';
+import {
+  columns, rows, options, events,
+} from '../src/options';
 
 suite('SCHEDULER', () => {
   let container;
@@ -64,6 +66,15 @@ suite('SCHEDULER', () => {
         assert.equal(tr.querySelectorAll('td').length, columns.length);
       }
     });
+    test('у td должен быть контент из events', () => {
+      const tbody = createTable().querySelector('tbody');
+      for (let i = 0; i < events.length; i += 1) {
+        const rowIndex = rows.indexOf(events[i].row);
+        const columnIndex = columns.indexOf(events[i].column);
+        const tr = tbody.querySelectorAll('tr')[rowIndex];
+        assert.equal(tr.querySelectorAll('td')[columnIndex].textContent, events[i].content);
+      }
+    });
   });
   suite('#createMobileTables', () => {
     test('должна вернуть fragment с table', () => {
@@ -83,10 +94,35 @@ suite('SCHEDULER', () => {
       for (let i = 0; i < columns.length; i += 1) {
         const table = createMobileTables().querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
+        assert.exists(tbody);
+      }
+    });
+    test('у tbody должен быть th', () => {
+      for (let i = 0; i < columns.length; i += 1) {
+        const table = createMobileTables().querySelectorAll('table')[i];
+        const tbody = table.querySelector('tbody');
         for (let j = 0; j < rows.length; j += 1) {
           const tr = tbody.querySelectorAll('tr')[j];
-          assert.equal(tr.outerHTML, `<tr><th>${rows[j]}</th><td></td></tr>`);
+          assert.equal(tr.querySelector('th').textContent, rows[j]);
         }
+      }
+    });
+    test('у tbody должны быть td', () => {
+      for (let i = 0; i < columns.length; i += 1) {
+        const table = createMobileTables().querySelectorAll('table')[i];
+        const tbody = table.querySelector('tbody');
+        const td = tbody.querySelectorAll('td');
+        assert.equal(td.length, rows.length);
+      }
+    });
+    test('у td должен быть контент из events', () => {
+      for (let i = 0; i < events.length; i += 1) {
+        const rowIndex = rows.indexOf(events[i].row);
+        const columnIndex = columns.indexOf(events[i].column);
+        const table = createMobileTables().querySelectorAll('table')[columnIndex];
+        const tbody = table.querySelector('tbody');
+        const tr = tbody.querySelectorAll('tr')[rowIndex];
+        assert.equal(tr.querySelector('td').textContent, events[i].content);
       }
     });
   });

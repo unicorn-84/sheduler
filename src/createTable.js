@@ -1,4 +1,4 @@
-import { columns, rows } from './options';
+import {columns, events, rows} from './options';
 
 
 export default function createTable() {
@@ -28,6 +28,16 @@ export default function createTable() {
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
+  }
+  // events
+  // todo: Добавить проверку event.column и event.row в columns и rows
+  // todo: Добавить проверку на совпадение
+  for (let i = 0; i < events.length; i += 1) {
+    const rowIndex = rows.indexOf(events[i].row);
+    const columnIndex = columns.indexOf(events[i].column);
+    tr = tbody.querySelectorAll('tr')[rowIndex];
+    const td = tr.querySelectorAll('td')[columnIndex];
+    td.textContent = events[i].content;
   }
   table.appendChild(tbody);
   return table;

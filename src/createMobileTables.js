@@ -1,4 +1,4 @@
-import { columns, rows } from './options';
+import { columns, events, rows } from './options';
 
 export default function createMobileTables() {
   const fragment = document.createDocumentFragment();
@@ -27,8 +27,20 @@ export default function createMobileTables() {
       tr.appendChild(td);
       tbody.appendChild(tr);
     }
+    // events
     table.appendChild(tbody);
     fragment.appendChild(table);
+  }
+  // events
+  // todo: Добавить проверку event.column и event.row в columns и rows
+  // todo: Добавить проверку на совпадение
+  for (let i = 0; i < events.length; i += 1) {
+    const rowIndex = rows.indexOf(events[i].row);
+    const columnIndex = columns.indexOf(events[i].column);
+    const table = fragment.querySelectorAll('table')[columnIndex];
+    const tbody = table.querySelector('tbody');
+    const tr = tbody.querySelectorAll('tr')[rowIndex];
+    tr.querySelector('td').textContent = events[i].content;
   }
   return fragment;
 }
