@@ -10,33 +10,38 @@ suite('SCHEDULER', () => {
   let container;
   setup(() => {
     createWindow();
-    container = document.getElementById('scheduler-container');
+    container = document.getElementById(options.containerId);
   });
   suite('#scheduler()', () => {
+    test('должна бросить ошибку, если container не найден', () => {
+      options.containerId = 'bad-container';
+      assert.throw(() => window.scheduler(options), 'sheduler.js: container не найден');
+      options.containerId = 'scheduler-container';
+    });
     test('должна удалять элементы из container', () => {
       const el = document.createElement('p');
       container.appendChild(el);
-      window.scheduler();
+      window.scheduler(options);
       assert.notExists(container.querySelector('p'));
     });
     test('должна добавлять элементы table в container', () => {
-      window.scheduler();
+      window.scheduler(options);
       assert.notEqual(container.getElementsByTagName('table').length, 0);
     });
     test(`должна добавлять table в container для ширины viewport больше ${options.breakpoint}px`, () => {
       window.resizeTo(992);
-      window.scheduler();
+      window.scheduler(options);
       assert.equal(container.getElementsByTagName('table').length, 1);
       window.resizeTo(1024);
     });
     test(`должна добавлять ${columns.length} table в container для ширины viewport меньше или равно ${options.breakpoint}px`, () => {
       window.resizeTo(options.breakpoint);
-      window.scheduler();
+      window.scheduler(options);
       assert.equal(container.getElementsByTagName('table').length, columns.length);
       window.resizeTo(1024);
     });
     test('должна менять таблицы при смене размеров viewport', () => {
-      window.scheduler();
+      window.scheduler(options);
       assert.equal(container.getElementsByTagName('table').length, 1);
       window.resizeTo(540);
       assert.equal(container.getElementsByTagName('table').length, columns.length);

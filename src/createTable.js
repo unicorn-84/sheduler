@@ -1,4 +1,4 @@
-import {columns, events, rows} from './options';
+import { columns, events, rows } from './options';
 
 
 export default function createTable() {
