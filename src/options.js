@@ -1,26 +1,65 @@
-const columns = ['Vlad', 'Ivan', 'Anna', 'Petr'];
-const rows = ['Vue', 'Polymer', 'React'];
 const events = [
   {
     column: 'Vlad',
     row: 'Polymer',
-    content: '+',
+    content: '<i class="far fa-frown fa-2x"></i>',
   },
   {
     column: 'Vlad',
     row: 'Vue',
-    content: '+',
+    content: '<i class="far fa-smile fa-2x"></i>',
   },
   {
     column: 'Anna',
     row: 'React',
-    content: '+',
+    content: '<i class="far fa-meh fa-2x"></i>',
+  },
+  {
+    column: 'Anna',
+    row: 'Polymer',
+    content: 'Hello',
+  },
+  {
+    column: 'Суббота',
+    row: 'React',
+    content: '<div class="event"><h4>Stretching</h4><p>Иван Иванов</p></div>',
   },
 ];
 const options = {
   breakpoint: 991,
-  containerId: 'scheduler-container',
+  container: 'scheduler-container',
+  table: {
+    attributes: {
+      class: 'table table-bordered table-dark',
+      disabled: false,
+    },
+    thead: {
+      attributes: {
+        class: 'thead',
+      },
+      th: {
+        class: 'th',
+      },
+    },
+    tbody: {
+      attributes: {
+        class: 'tbody',
+      },
+      th: {
+        attributes: {
+          class: 'th',
+        },
+      },
+      td: {
+        attributes: {
+          class: 'td',
+        },
+        content: null,
+      },
+    },
+    columns: ['Vlad', 'Ivan', 'Anna', 'Суббота'],
+    rows: ['Vue', 'Polymer', 'React'],
+  },
+  events,
 };
-export {
-  columns, rows, options, events,
-};
+export default options;

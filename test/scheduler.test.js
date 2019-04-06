@@ -2,27 +2,28 @@ import { assert } from 'chai';
 import createWindow from './setup/setup';
 import createTable from '../src/createTable';
 import createMobileTables from '../src/createMobileTables';
-import {
-  columns, rows, options, events,
-} from '../src/options';
+import options from '../src/options';
+
+const { events } = options;
+const { columns, rows } = options.table;
 
 suite('SCHEDULER', () => {
   let container;
   setup(() => {
     createWindow();
-    container = document.getElementById(options.containerId);
+    container = document.getElementById(options.container);
   });
   suite('#scheduler()', () => {
     test('должна бросить ошибку, если container не найден', () => {
-      options.containerId = 'bad-container';
+      options.container = 'bad-container';
       assert.throw(() => window.scheduler(options), 'sheduler.js: container не найден');
-      options.containerId = 'scheduler-container';
+      options.container = 'scheduler-container';
     });
     test('должна удалять элементы из container', () => {
-      const el = document.createElement('p');
+      const el = document.createElement('abbr');
       container.appendChild(el);
       window.scheduler(options);
-      assert.notExists(container.querySelector('p'));
+      assert.notExists(container.querySelector('abbr'));
     });
     test('должна добавлять элементы table в container', () => {
       window.scheduler(options);
@@ -50,20 +51,20 @@ suite('SCHEDULER', () => {
   });
   suite('#createTable', () => {
     test('должна вернуть table', () => {
-      assert.equal(createTable().nodeName, 'TABLE');
-      assert.equal(createTable().childElementCount, 2);
-      assert.equal(createTable().children[0].nodeName, 'THEAD');
-      assert.equal(createTable().children[1].nodeName, 'TBODY');
+      assert.equal(createTable(options).nodeName, 'TABLE');
+      assert.equal(createTable(options).childElementCount, 2);
+      assert.equal(createTable(options).children[0].nodeName, 'THEAD');
+      assert.equal(createTable(options).children[1].nodeName, 'TBODY');
     });
     test('у table должен быть thead', () => {
-      const thead = createTable().querySelector('thead');
+      const thead = createTable(options).querySelector('thead');
       for (let i = 1; i < columns.length; i += 1) {
         const th = thead.querySelectorAll('th')[i];
         assert.equal(th.textContent, columns[i - 1]);
       }
     });
     test('у table должен быть tbody', () => {
-      const tbody = createTable().querySelector('tbody');
+      const tbody = createTable(options).querySelector('tbody');
       assert.equal(tbody.childElementCount, rows.length);
       for (let i = 0; i < rows.length; i += 1) {
         const tr = tbody.querySelectorAll('tr')[i];
@@ -72,39 +73,39 @@ suite('SCHEDULER', () => {
       }
     });
     test('у td должен быть контент из events', () => {
-      const tbody = createTable().querySelector('tbody');
+      const tbody = createTable(options).querySelector('tbody');
       for (let i = 0; i < events.length; i += 1) {
         const rowIndex = rows.indexOf(events[i].row);
         const columnIndex = columns.indexOf(events[i].column);
         const tr = tbody.querySelectorAll('tr')[rowIndex];
-        assert.equal(tr.querySelectorAll('td')[columnIndex].textContent, events[i].content);
+        assert.equal(tr.querySelectorAll('td')[columnIndex].innerHTML, events[i].content);
       }
     });
   });
   suite('#createMobileTables', () => {
     test('должна вернуть fragment с table', () => {
-      assert.equal(createMobileTables().nodeName, '#document-fragment');
-      assert.equal(createMobileTables().querySelectorAll('table').length, columns.length);
+      assert.equal(createMobileTables(options).nodeName, '#document-fragment');
+      assert.equal(createMobileTables(options).querySelectorAll('table').length, columns.length);
       for (let i = 0; i < columns.length; i += 1) {
-        assert.equal(createMobileTables().querySelectorAll('table')[i].nodeName, 'TABLE');
+        assert.equal(createMobileTables(options).querySelectorAll('table')[i].nodeName, 'TABLE');
       }
     });
     test('у table должен быть thead', () => {
       for (let i = 0; i < columns.length; i += 1) {
-        const table = createMobileTables().querySelectorAll('table')[i];
+        const table = createMobileTables(options).querySelectorAll('table')[i];
         assert.equal(table.querySelector('thead').outerHTML, `<thead><tr><th></th><th>${columns[i]}</th></tr></thead>`);
       }
     });
     test('у table должен быть tbody', () => {
       for (let i = 0; i < columns.length; i += 1) {
-        const table = createMobileTables().querySelectorAll('table')[i];
+        const table = createMobileTables(options).querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
         assert.exists(tbody);
       }
     });
     test('у tbody должен быть th', () => {
       for (let i = 0; i < columns.length; i += 1) {
-        const table = createMobileTables().querySelectorAll('table')[i];
+        const table = createMobileTables(options).querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
         for (let j = 0; j < rows.length; j += 1) {
           const tr = tbody.querySelectorAll('tr')[j];
@@ -114,7 +115,7 @@ suite('SCHEDULER', () => {
     });
     test('у tbody должны быть td', () => {
       for (let i = 0; i < columns.length; i += 1) {
-        const table = createMobileTables().querySelectorAll('table')[i];
+        const table = createMobileTables(options).querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
         const td = tbody.querySelectorAll('td');
         assert.equal(td.length, rows.length);
@@ -124,10 +125,10 @@ suite('SCHEDULER', () => {
       for (let i = 0; i < events.length; i += 1) {
         const rowIndex = rows.indexOf(events[i].row);
         const columnIndex = columns.indexOf(events[i].column);
-        const table = createMobileTables().querySelectorAll('table')[columnIndex];
+        const table = createMobileTables(options).querySelectorAll('table')[columnIndex];
         const tbody = table.querySelector('tbody');
         const tr = tbody.querySelectorAll('tr')[rowIndex];
-        assert.equal(tr.querySelector('td').textContent, events[i].content);
+        assert.equal(tr.querySelector('td').innerHTML, events[i].content);
       }
     });
   });

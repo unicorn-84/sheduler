@@ -1,0 +1,25 @@
+{
+  "breakpoint": "991px",
+  "container": "scheduler-container",
+  "table": {
+    "attributes": {},
+    "thead": {
+      "attributes": {},
+      "th": {
+        "attributes": {}
+      }
+    },
+    "tbody": {
+      "attributes": {},
+      "th": {
+        "attributes": {}
+      },
+      "td": {
+        "attributes": {}
+      }
+    },
+    "columns": [],
+    "rows": []
+  },
+  "events": []
+}

@@ -1,5 +1,5 @@
 import matchMediaPolyfill from 'mq-polyfill';
-import { options } from '../../src/options';
+import options from '../../src/options';
 
 const fs = require('fs');
 const path = require('path');
@@ -9,7 +9,7 @@ const production = process.env.NODE_ENV === 'production';
 const scheduler = fs.readFileSync(path.join(__dirname, production ? '../../build/scheduler.min.js' : '../../dev/scheduler.js'), { encoding: 'utf-8' });
 
 function createWindow() {
-  const jsdom = new JSDOM(`<!doctype html><html><body><div id="${options.containerId}"></div></body></html>`, { runScripts: 'dangerously' });
+  const jsdom = new JSDOM(`<!doctype html><html><body><div id="${options.container}"></div></body></html>`, { runScripts: 'dangerously' });
   const { window } = jsdom;
   const scriptEl = window.document.createElement('script');
   scriptEl.textContent = scheduler;

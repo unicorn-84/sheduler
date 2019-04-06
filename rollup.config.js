@@ -2,6 +2,7 @@ const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const { terser } = require('rollup-plugin-terser');
+const json = require('rollup-plugin-json');
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -15,6 +16,7 @@ module.exports = [
       sourcemap: !production,
     },
     plugins: [
+      json(),
       resolve(),
       commonjs(),
       babel({
