@@ -1,7 +1,9 @@
 import { assert } from 'chai';
+import _ from 'lodash';
 import createWindow from './setup/setup';
 import createTable from '../src/createTable';
 import createMobileTables from '../src/createMobileTables';
+import addAttributes from '../src/addAttributes';
 import options from '../src/options';
 
 const { events } = options;
@@ -130,6 +132,18 @@ suite('SCHEDULER', () => {
         const tr = tbody.querySelectorAll('tr')[rowIndex];
         assert.equal(tr.querySelector('td').innerHTML, events[i].content);
       }
+    });
+  });
+  suite('#addAttributes', () => {
+    test('должна добавлять аттрибуты к элементу', () => {
+      let el = document.createElement('div');
+      const attrs = {
+        class: 'smth', id: 'id', disabled: true, 'data-smth': false, 'smth-null': null,
+      };
+      el = addAttributes(el, attrs);
+      _.each(attrs, (value, key) => {
+        assert.equal(el.getAttribute(key), String(value));
+      });
     });
   });
 });

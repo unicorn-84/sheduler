@@ -5,17 +5,24 @@
     "attributes": {},
     "thead": {
       "attributes": {},
+      "tr": {
+        "attributes": {}
+      },
       "th": {
         "attributes": {}
       }
     },
     "tbody": {
       "attributes": {},
+      "tr": {
+        "attributes": {}
+      },
       "th": {
         "attributes": {}
       },
       "td": {
-        "attributes": {}
+        "attributes": {},
+        "content": ""
       }
     },
     "columns": [],
