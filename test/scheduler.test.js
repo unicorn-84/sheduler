@@ -75,12 +75,14 @@ suite('SCHEDULER', () => {
       }
     });
     test('у td должен быть контент из events', () => {
-      const tbody = createTable(options).querySelector('tbody');
-      for (let i = 0; i < events.length; i += 1) {
-        const rowIndex = rows.indexOf(events[i].row);
-        const columnIndex = columns.indexOf(events[i].column);
-        const tr = tbody.querySelectorAll('tr')[rowIndex];
-        assert.equal(tr.querySelectorAll('td')[columnIndex].innerHTML, events[i].content);
+      if (events.length > 0) {
+        const tbody = createTable(options).querySelector('tbody');
+        for (let i = 0; i < events.length; i += 1) {
+          const rowIndex = rows.indexOf(events[i].row);
+          const columnIndex = columns.indexOf(events[i].column);
+          const tr = tbody.querySelectorAll('tr')[rowIndex];
+          assert.equal(tr.querySelectorAll('td')[columnIndex].innerHTML, events[i].content);
+        }
       }
     });
   });
@@ -95,7 +97,7 @@ suite('SCHEDULER', () => {
     test('у table должен быть thead', () => {
       for (let i = 0; i < columns.length; i += 1) {
         const table = createMobileTables(options).querySelectorAll('table')[i];
-        assert.equal(table.querySelector('thead').outerHTML, `<thead><tr><th></th><th>${columns[i]}</th></tr></thead>`);
+        assert.equal(table.querySelector('thead').outerHTML, `<thead class="thead"><tr><th></th><th>${columns[i]}</th></tr></thead>`);
       }
     });
     test('у table должен быть tbody', () => {
@@ -116,22 +118,20 @@ suite('SCHEDULER', () => {
       }
     });
     test('у tbody должны быть td', () => {
-      for (let i = 0; i < columns.length; i += 1) {
-        const table = createMobileTables(options).querySelectorAll('table')[i];
-        const tbody = table.querySelector('tbody');
-        const td = tbody.querySelectorAll('td');
-        assert.equal(td.length, rows.length);
-      }
+      const table = createMobileTables(options).querySelectorAll('table')[0];
+      const tbody = table.querySelector('tbody');
+      const td = tbody.querySelectorAll('td');
+      assert.equal(td.length, rows.length);
+      assert.equal(td[0].innerHTML, 'text');
+      assert.equal(td[0].className, 'td');
     });
     test('у td должен быть контент из events', () => {
-      for (let i = 0; i < events.length; i += 1) {
-        const rowIndex = rows.indexOf(events[i].row);
-        const columnIndex = columns.indexOf(events[i].column);
-        const table = createMobileTables(options).querySelectorAll('table')[columnIndex];
-        const tbody = table.querySelector('tbody');
-        const tr = tbody.querySelectorAll('tr')[rowIndex];
-        assert.equal(tr.querySelector('td').innerHTML, events[i].content);
-      }
+      const rowIndex = rows.indexOf(events[0].row);
+      const columnIndex = columns.indexOf(events[0].column);
+      const table = createMobileTables(options).querySelectorAll('table')[columnIndex];
+      const tbody = table.querySelector('tbody');
+      const tr = tbody.querySelectorAll('tr')[rowIndex];
+      assert.equal(tr.querySelector('td').outerHTML, '<td class="td bg-dark" disabled="true" data-column="anna"><i class="fas fa-meh fa-2x text-warning"></i></td>');
     });
   });
   suite('#addAttributes', () => {

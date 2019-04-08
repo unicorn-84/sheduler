@@ -1,6 +1,9 @@
 import addAttributes from './addAttributes';
 
 export default function createTable(opts) {
+  if (opts.table.columns.length === 0 && opts.table.rows.length === 0) {
+    return;
+  }
   let table = document.createElement('table');
   if (opts.table.attributes) {
     table = addAttributes(table, opts.table.attributes);
@@ -48,21 +51,24 @@ export default function createTable(opts) {
       if (opts.table.tbody.td.attributes) {
         td = addAttributes(td, opts.table.tbody.td.attributes);
       }
-      td.insertAdjacentHTML('afterbegin', opts.table.tbody.td.content);
+      td.innerHTML = opts.table.tbody.td.content;
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
   }
   // events
-  // todo: Добавить проверку event.column и event.row в columns и rows
   // todo: Добавить проверку на совпадение
-  // todo: Переводить в нижний регистр
   for (let i = 0; i < opts.events.length; i += 1) {
     const rowIndex = opts.table.rows.indexOf(opts.events[i].row);
     const columnIndex = opts.table.columns.indexOf(opts.events[i].column);
-    tr = tbody.querySelectorAll('tr')[rowIndex];
-    const td = tr.querySelectorAll('td')[columnIndex];
-    td.innerHTML = opts.events[i].content;
+    if (rowIndex !== -1 && columnIndex !== -1) {
+      tr = tbody.querySelectorAll('tr')[rowIndex];
+      let td = tr.querySelectorAll('td')[columnIndex];
+      if (opts.events[i].attributes) {
+        td = addAttributes(td, opts.events[i].attributes);
+      }
+      td.innerHTML = opts.events[i].content;
+    }
   }
   table.appendChild(tbody);
   return table;

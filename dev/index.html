@@ -27,15 +27,16 @@
     container: 'scheduler',
     table: {
       attributes: {
-        class: 'table table-bordered bg-light text-center'
+        class: 'table table-bordered bg-light text-center w-100',
+        style: 'table-layout: fixed; border-collapse: separate; border-spacing: 1px;'
       },
       thead: {
         attributes: {
-          class: 'text-center text-uppercase text-info',
+          class: 'text-center text-uppercase',
         },
         th: {
           attributes: {
-            class: 'p-3',
+            class: 'p-3 border-bottom-1',
           }
         }
       },
@@ -47,9 +48,9 @@
         },
         td: {
           attributes: {
-            class: 'text-center p-3 text-secondary bg-light align-middle',
+            class: 'text-center p-3 text-secondary align-middle',
           },
-          content: '<i class="fas fa-frown"></i>'
+          content: '<i class="fas fa-frown fa"></i>'
         }
       },
       columns: ['Иван', 'Петр', 'Анна', 'Влад'],
@@ -57,34 +58,53 @@
     },
     events: [
       {
+        attributes: {
+          'data-column': 'anna',
+          class: 'p-2 border border-warning',
+        },
         column: 'Анна',
         row: 'JS',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
+        content: '<i class="fas fa-meh fa-lg text-warning"></i>'
       },
       {
+        attributes: {
+          class: 'border border-success',
+        },
         column: 'Иван',
         row: 'RUBY',
         content: '<i class="fas fa-smile fa-2x text-success"></i>'
       },
       {
+        attributes: {
+          class: 'border border-success',
+        },
         column: 'Иван',
         row: 'JAVA',
         content: '<i class="fas fa-smile fa-2x text-success"></i>'
       },
       {
+        attributes: {
+          class: 'border border-success',
+        },
         column: 'Петр',
         row: 'JS',
         content: '<i class="fas fa-smile fa-2x text-success"></i>'
       },
       {
+        attributes: {
+          class: 'border border-success',
+        },
         column: 'Петр',
         row: 'PHP',
         content: '<i class="fas fa-smile fa-2x text-success"></i>'
       },
       {
+        attributes: {
+          class: 'p-2 border border-warning',
+        },
         column: 'Влад',
         row: 'JAVA',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
+        content: '<i class="fas fa-meh fa-lg text-warning"></i>'
       }
     ],
   });
