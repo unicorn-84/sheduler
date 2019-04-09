@@ -25,8 +25,14 @@
         "content": ""
       }
     },
-    "columns": [],
-    "rows": []
+    "columns": {
+      "data": [],
+      "sort": false
+    },
+    "rows": {
+      "data": [],
+      "sort": false
+    }
   },
   "events": []
 }

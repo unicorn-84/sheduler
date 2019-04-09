@@ -1,4 +1,4 @@
-const options = {
+export default {
   breakpoint: 991,
   container: 'scheduler-container',
   table: {
@@ -10,13 +10,25 @@ const options = {
       attributes: {
         class: 'thead',
       },
+      tr: {
+        attributes: {
+          class: 'tr',
+        },
+      },
       th: {
-        class: 'th',
+        attributes: {
+          class: 'th',
+        },
       },
     },
     tbody: {
       attributes: {
         class: 'tbody',
+      },
+      tr: {
+        attributes: {
+          class: 'tr',
+        },
       },
       th: {
         attributes: {
@@ -26,13 +38,18 @@ const options = {
       td: {
         attributes: {
           class: 'td',
-          disabled: true,
         },
         content: 'text',
       },
     },
-    columns: ['vlad', 'ivan', 'anna'],
-    rows: ['vue', 'polymer', 'react'],
+    columns: {
+      data: ['vlad', 'ivan', 'anna'],
+      sort: false,
+    },
+    rows: {
+      data: ['vue', 'polymer', 'react'],
+      sort: false,
+    },
   },
   events: [
     {
@@ -46,4 +63,3 @@ const options = {
     },
   ],
 };
-export default options;

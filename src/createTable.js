@@ -1,9 +1,6 @@
 import addAttributes from './addAttributes';
 
 export default function createTable(opts) {
-  if (opts.table.columns.length === 0 && opts.table.rows.length === 0) {
-    return;
-  }
   let table = document.createElement('table');
   if (opts.table.attributes) {
     table = addAttributes(table, opts.table.attributes);
@@ -18,14 +15,19 @@ export default function createTable(opts) {
   }
   let th;
   // thead
-  for (let i = -1; i < opts.table.columns.length; i += 1) {
+  if (opts.table.rows.data.length > 0) {
     th = document.createElement('th');
     if (opts.table.thead.th.attributes) {
       th = addAttributes(th, opts.table.thead.th.attributes);
     }
-    if (i !== -1) {
-      th.textContent = opts.table.columns[i];
+    tr.appendChild(th);
+  }
+  for (let i = 0; i < opts.table.columns.data.length; i += 1) {
+    th = document.createElement('th');
+    if (opts.table.thead.th.attributes) {
+      th = addAttributes(th, opts.table.thead.th.attributes);
     }
+    th.textContent = opts.table.columns.data[i];
     tr.appendChild(th);
   }
   thead.appendChild(tr);
@@ -35,7 +37,7 @@ export default function createTable(opts) {
   if (opts.table.tbody.attributes) {
     tbody = addAttributes(tbody, opts.table.tbody.attributes);
   }
-  for (let i = 0; i < opts.table.rows.length; i += 1) {
+  for (let i = 0; i < opts.table.rows.data.length; i += 1) {
     tr = document.createElement('tr');
     if (opts.table.tbody.tr.attributes) {
       tr = addAttributes(tr, opts.table.tbody.tr.attributes);
@@ -44,9 +46,9 @@ export default function createTable(opts) {
     if (opts.table.tbody.th.attributes) {
       th = addAttributes(th, opts.table.tbody.th.attributes);
     }
-    th.textContent = opts.table.rows[i];
+    th.textContent = opts.table.rows.data[i];
     tr.appendChild(th);
-    for (let j = 0; j < opts.table.columns.length; j += 1) {
+    for (let j = 0; j < opts.table.columns.data.length; j += 1) {
       let td = document.createElement('td');
       if (opts.table.tbody.td.attributes) {
         td = addAttributes(td, opts.table.tbody.td.attributes);
@@ -59,8 +61,8 @@ export default function createTable(opts) {
   // events
   // todo: Добавить проверку на совпадение
   for (let i = 0; i < opts.events.length; i += 1) {
-    const rowIndex = opts.table.rows.indexOf(opts.events[i].row);
-    const columnIndex = opts.table.columns.indexOf(opts.events[i].column);
+    const rowIndex = opts.table.rows.data.indexOf(opts.events[i].row);
+    const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
       tr = tbody.querySelectorAll('tr')[rowIndex];
       let td = tr.querySelectorAll('td')[columnIndex];

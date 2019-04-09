@@ -1,5 +1,5 @@
 import matchMediaPolyfill from 'mq-polyfill';
-import options from '../../src/options';
+import options from '../options';
 
 const fs = require('fs');
 const path = require('path');

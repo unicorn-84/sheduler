@@ -2,7 +2,7 @@ import addAttributes from './addAttributes';
 
 export default function createMobileTables(opts) {
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < opts.table.columns.length; i += 1) {
+  for (let i = 0; i < opts.table.columns.data.length; i += 1) {
     let table = document.createElement('table');
     if (opts.table.attributes) {
       table = addAttributes(table, opts.table.attributes);
@@ -33,7 +33,7 @@ export default function createMobileTables(opts) {
     if (opts.table.tbody.attributes) {
       tbody = addAttributes(tbody, opts.table.tbody.attributes);
     }
-    for (let k = 0; k < opts.table.rows.length; k += 1) {
+    for (let k = 0; k < opts.table.rows.data.length; k += 1) {
       tr = document.createElement('tr');
       if (opts.table.tbody.tr.attributes) {
         tr = addAttributes(tr, opts.table.tbody.tr.attributes);
@@ -59,8 +59,8 @@ export default function createMobileTables(opts) {
   // events
   // todo: Добавить проверку на совпадение
   for (let i = 0; i < opts.events.length; i += 1) {
-    const rowIndex = opts.table.rows.indexOf(opts.events[i].row);
-    const columnIndex = opts.table.columns.indexOf(opts.events[i].column);
+    const rowIndex = opts.table.rows.data.indexOf(opts.events[i].row);
+    const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
       const table = fragment.querySelectorAll('table')[columnIndex];
       const tbody = table.querySelector('tbody');

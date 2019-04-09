@@ -4,7 +4,7 @@ import createWindow from './setup/setup';
 import createTable from '../src/createTable';
 import createMobileTables from '../src/createMobileTables';
 import addAttributes from '../src/addAttributes';
-import options from '../src/options';
+import options from './options';
 
 const { events } = options;
 const { columns, rows } = options.table;
@@ -37,43 +37,21 @@ suite('SCHEDULER', () => {
       assert.equal(container.getElementsByTagName('table').length, 1);
       window.resizeTo(1024);
     });
-    test(`должна добавлять ${columns.length} table в container для ширины viewport меньше или равно ${options.breakpoint}px`, () => {
+    test(`должна добавлять ${columns.data.length} table в container для ширины viewport меньше или равно ${options.breakpoint}px`, () => {
       window.resizeTo(options.breakpoint);
       window.scheduler(options);
-      assert.equal(container.getElementsByTagName('table').length, columns.length);
+      assert.equal(container.getElementsByTagName('table').length, columns.data.length);
       window.resizeTo(1024);
     });
     test('должна менять таблицы при смене размеров viewport', () => {
       window.scheduler(options);
       assert.equal(container.getElementsByTagName('table').length, 1);
       window.resizeTo(540);
-      assert.equal(container.getElementsByTagName('table').length, columns.length);
+      assert.equal(container.getElementsByTagName('table').length, columns.data.length);
       window.resizeTo(1024);
     });
   });
   suite('#createTable', () => {
-    test('должна вернуть table', () => {
-      assert.equal(createTable(options).nodeName, 'TABLE');
-      assert.equal(createTable(options).childElementCount, 2);
-      assert.equal(createTable(options).children[0].nodeName, 'THEAD');
-      assert.equal(createTable(options).children[1].nodeName, 'TBODY');
-    });
-    test('у table должен быть thead', () => {
-      const thead = createTable(options).querySelector('thead');
-      for (let i = 1; i < columns.length; i += 1) {
-        const th = thead.querySelectorAll('th')[i];
-        assert.equal(th.textContent, columns[i - 1]);
-      }
-    });
-    test('у table должен быть tbody', () => {
-      const tbody = createTable(options).querySelector('tbody');
-      assert.equal(tbody.childElementCount, rows.length);
-      for (let i = 0; i < rows.length; i += 1) {
-        const tr = tbody.querySelectorAll('tr')[i];
-        assert.equal(tr.querySelector('th').textContent, rows[i]);
-        assert.equal(tr.querySelectorAll('td').length, columns.length);
-      }
-    });
     test('у td должен быть контент из events', () => {
       if (events.length > 0) {
         const tbody = createTable(options).querySelector('tbody');
@@ -89,29 +67,29 @@ suite('SCHEDULER', () => {
   suite('#createMobileTables', () => {
     test('должна вернуть fragment с table', () => {
       assert.equal(createMobileTables(options).nodeName, '#document-fragment');
-      assert.equal(createMobileTables(options).querySelectorAll('table').length, columns.length);
-      for (let i = 0; i < columns.length; i += 1) {
+      assert.equal(createMobileTables(options).querySelectorAll('table').length, columns.data.length);
+      for (let i = 0; i < columns.data.length; i += 1) {
         assert.equal(createMobileTables(options).querySelectorAll('table')[i].nodeName, 'TABLE');
       }
     });
     test('у table должен быть thead', () => {
-      for (let i = 0; i < columns.length; i += 1) {
+      for (let i = 0; i < columns.data.length; i += 1) {
         const table = createMobileTables(options).querySelectorAll('table')[i];
         assert.equal(table.querySelector('thead').outerHTML, `<thead class="thead"><tr><th></th><th>${columns[i]}</th></tr></thead>`);
       }
     });
     test('у table должен быть tbody', () => {
-      for (let i = 0; i < columns.length; i += 1) {
+      for (let i = 0; i < columns.data.length; i += 1) {
         const table = createMobileTables(options).querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
         assert.exists(tbody);
       }
     });
     test('у tbody должен быть th', () => {
-      for (let i = 0; i < columns.length; i += 1) {
+      for (let i = 0; i < columns.data.length; i += 1) {
         const table = createMobileTables(options).querySelectorAll('table')[i];
         const tbody = table.querySelector('tbody');
-        for (let j = 0; j < rows.length; j += 1) {
+        for (let j = 0; j < rows.data.length; j += 1) {
           const tr = tbody.querySelectorAll('tr')[j];
           assert.equal(tr.querySelector('th').textContent, rows[j]);
         }
@@ -121,7 +99,7 @@ suite('SCHEDULER', () => {
       const table = createMobileTables(options).querySelectorAll('table')[0];
       const tbody = table.querySelector('tbody');
       const td = tbody.querySelectorAll('td');
-      assert.equal(td.length, rows.length);
+      assert.equal(td.length, rows.data.length);
       assert.equal(td[0].innerHTML, 'text');
       assert.equal(td[0].className, 'td');
     });

@@ -1,14 +1,21 @@
 import defaultsDeep from 'lodash/defaultsDeep';
-import defaultOpts from './defaultOpts';
+import defaultOptions from './defaultOptions';
 import createTable from './createTable';
 import createMobileTables from './createMobileTables';
+import createColumnsAndRows from './createColumnsAndRows';
 
 function scheduler(options) {
-  const opts = defaultsDeep(options, defaultOpts);
+  const opts = defaultsDeep(options, defaultOptions);
   const container = document.getElementById(opts.container);
   if (!container) {
     throw new Error('sheduler.js: container не найден');
   }
+  const { columns, rows } = createColumnsAndRows(opts);
+  if (columns.length === 0 && rows.length === 0) {
+    return;
+  }
+  opts.table.columns.data = columns;
+  opts.table.rows.data = rows;
   const mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
   function screenTest(e = {}) {
     container.innerHTML = '';
@@ -18,10 +25,8 @@ function scheduler(options) {
       container.appendChild(createTable(opts));
     }
   }
-  if (opts.table.columns.length > 0 && opts.table.rows.length > 0) {
-    mql.addListener(screenTest);
-    screenTest();
-  }
+  mql.addListener(screenTest);
+  screenTest();
 }
 
 export default scheduler;
