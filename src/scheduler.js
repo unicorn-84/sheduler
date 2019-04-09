@@ -12,15 +12,16 @@ function scheduler(options) {
   const mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
   function screenTest(e = {}) {
     container.innerHTML = '';
-    // todo: не создавать пустые таблицы
     if (e.matches || mql.matches) {
       container.appendChild(createMobileTables(opts));
     } else {
       container.appendChild(createTable(opts));
     }
   }
-  mql.addListener(screenTest);
-  screenTest();
+  if (opts.table.columns.length > 0 && opts.table.rows.length > 0) {
+    mql.addListener(screenTest);
+    screenTest();
+  }
 }
 
 export default scheduler;

@@ -1,9 +1,6 @@
 import addAttributes from './addAttributes';
 
 export default function createMobileTables(opts) {
-  if (opts.table.columns.length === 0 && opts.table.rows.length === 0) {
-    return;
-  }
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < opts.table.columns.length; i += 1) {
     let table = document.createElement('table');
