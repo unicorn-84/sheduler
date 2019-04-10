@@ -1,9 +1,10 @@
 import { assert } from 'chai';
 import createWindow from './setup';
 
-createWindow();
-
 suite.skip('TESTING ENV', () => {
+  setup(() => {
+    createWindow();
+  });
   test('window должно быть определено', () => {
     assert.exists(window);
   });

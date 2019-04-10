@@ -1,127 +1,47 @@
 import { assert } from 'chai';
 import _ from 'lodash';
 import createWindow from './setup/setup';
-import createTable from '../src/createTable';
-import createMobileTables from '../src/createMobileTables';
-import addAttributes from '../src/addAttributes';
 import options from './options';
 
-const { events } = options;
-const { columns, rows } = options.table;
-
-suite('SCHEDULER', () => {
+suite('#scheduler()', () => {
+  let opts;
   let container;
   setup(() => {
+    opts = _.defaultsDeep({}, options);
     createWindow();
-    container = document.getElementById(options.container);
+    container = document.getElementById('scheduler-container');
   });
-  suite('#scheduler()', () => {
-    test('должна бросить ошибку, если container не найден', () => {
-      options.container = 'bad-container';
-      assert.throw(() => window.scheduler(options), 'sheduler.js: container не найден');
-      options.container = 'scheduler-container';
-    });
-    test('должна удалять элементы из container', () => {
-      const el = document.createElement('abbr');
-      container.appendChild(el);
-      window.scheduler(options);
-      assert.notExists(container.querySelector('abbr'));
-    });
-    test('должна добавлять элементы table в container', () => {
-      window.scheduler(options);
-      assert.notEqual(container.getElementsByTagName('table').length, 0);
-    });
-    test(`должна добавлять table в container для ширины viewport больше ${options.breakpoint}px`, () => {
-      window.resizeTo(992);
-      window.scheduler(options);
-      assert.equal(container.getElementsByTagName('table').length, 1);
-      window.resizeTo(1024);
-    });
-    test(`должна добавлять ${columns.data.length} table в container для ширины viewport меньше или равно ${options.breakpoint}px`, () => {
-      window.resizeTo(options.breakpoint);
-      window.scheduler(options);
-      assert.equal(container.getElementsByTagName('table').length, columns.data.length);
-      window.resizeTo(1024);
-    });
-    test('должна менять таблицы при смене размеров viewport', () => {
-      window.scheduler(options);
-      assert.equal(container.getElementsByTagName('table').length, 1);
-      window.resizeTo(540);
-      assert.equal(container.getElementsByTagName('table').length, columns.data.length);
-      window.resizeTo(1024);
-    });
+  test('должна бросить ошибку, если container не найден', () => {
+    opts.container = 'bad-container';
+    assert.throw(() => window.scheduler(opts), 'sheduler.js: container не найден');
   });
-  suite('#createTable', () => {
-    test('у td должен быть контент из events', () => {
-      if (events.length > 0) {
-        const tbody = createTable(options).querySelector('tbody');
-        for (let i = 0; i < events.length; i += 1) {
-          const rowIndex = rows.indexOf(events[i].row);
-          const columnIndex = columns.indexOf(events[i].column);
-          const tr = tbody.querySelectorAll('tr')[rowIndex];
-          assert.equal(tr.querySelectorAll('td')[columnIndex].innerHTML, events[i].content);
-        }
-      }
-    });
+  test('должна удалять элементы из container', () => {
+    const el = document.createElement('button');
+    container.appendChild(el);
+    window.scheduler(opts);
+    assert.notExists(container.querySelector('button'));
   });
-  suite('#createMobileTables', () => {
-    test('должна вернуть fragment с table', () => {
-      assert.equal(createMobileTables(options).nodeName, '#document-fragment');
-      assert.equal(createMobileTables(options).querySelectorAll('table').length, columns.data.length);
-      for (let i = 0; i < columns.data.length; i += 1) {
-        assert.equal(createMobileTables(options).querySelectorAll('table')[i].nodeName, 'TABLE');
-      }
-    });
-    test('у table должен быть thead', () => {
-      for (let i = 0; i < columns.data.length; i += 1) {
-        const table = createMobileTables(options).querySelectorAll('table')[i];
-        assert.equal(table.querySelector('thead').outerHTML, `<thead class="thead"><tr><th></th><th>${columns[i]}</th></tr></thead>`);
-      }
-    });
-    test('у table должен быть tbody', () => {
-      for (let i = 0; i < columns.data.length; i += 1) {
-        const table = createMobileTables(options).querySelectorAll('table')[i];
-        const tbody = table.querySelector('tbody');
-        assert.exists(tbody);
-      }
-    });
-    test('у tbody должен быть th', () => {
-      for (let i = 0; i < columns.data.length; i += 1) {
-        const table = createMobileTables(options).querySelectorAll('table')[i];
-        const tbody = table.querySelector('tbody');
-        for (let j = 0; j < rows.data.length; j += 1) {
-          const tr = tbody.querySelectorAll('tr')[j];
-          assert.equal(tr.querySelector('th').textContent, rows[j]);
-        }
-      }
-    });
-    test('у tbody должны быть td', () => {
-      const table = createMobileTables(options).querySelectorAll('table')[0];
-      const tbody = table.querySelector('tbody');
-      const td = tbody.querySelectorAll('td');
-      assert.equal(td.length, rows.data.length);
-      assert.equal(td[0].innerHTML, 'text');
-      assert.equal(td[0].className, 'td');
-    });
-    test('у td должен быть контент из events', () => {
-      const rowIndex = rows.indexOf(events[0].row);
-      const columnIndex = columns.indexOf(events[0].column);
-      const table = createMobileTables(options).querySelectorAll('table')[columnIndex];
-      const tbody = table.querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr')[rowIndex];
-      assert.equal(tr.querySelector('td').outerHTML, '<td class="td bg-dark" disabled="true" data-column="anna"><i class="fas fa-meh fa-2x text-warning"></i></td>');
-    });
+  test('должна добавлять элементы table в container', () => {
+    window.scheduler(opts);
+    assert.notEqual(container.getElementsByTagName('table').length, 0);
   });
-  suite('#addAttributes', () => {
-    test('должна добавлять аттрибуты к элементу', () => {
-      let el = document.createElement('div');
-      const attrs = {
-        class: 'smth', id: 'id', disabled: true, 'data-smth': false, 'smth-null': null,
-      };
-      el = addAttributes(el, attrs);
-      _.each(attrs, (value, key) => {
-        assert.equal(el.getAttribute(key), String(value));
-      });
-    });
+  test('должна добавлять table в container, если viewport > breakpoint', () => {
+    window.resizeTo(Number(opts.breakpoint.slice(0, -2)) + 1);
+    window.scheduler(opts);
+    assert.equal(container.getElementsByTagName('table').length, 1);
+    window.resizeTo(1024);
+  });
+  test('должна добавлять tables в container, если viewport <= breakpoint', () => {
+    window.resizeTo(Number(opts.breakpoint.slice(0, -2)));
+    window.scheduler(opts);
+    assert.equal(container.getElementsByTagName('table').length, 3);
+    window.resizeTo(1024);
+  });
+  test('должна менять таблицы при смене размеров viewport', () => {
+    window.scheduler(opts);
+    assert.equal(container.getElementsByTagName('table').length, 1);
+    window.resizeTo(540);
+    assert.equal(container.getElementsByTagName('table').length, 3);
+    window.resizeTo(1024);
   });
 });

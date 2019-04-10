@@ -4,7 +4,7 @@ import createWindow from './setup/setup';
 import createTable from '../src/createTable';
 import options from './options';
 
-suite('#createTable', () => {
+suite('#createTable()', () => {
   let opts;
   setup(() => {
     opts = _.defaultsDeep({}, options);
@@ -14,7 +14,7 @@ suite('#createTable', () => {
     test('должна вернуть table', () => {
       const table = createTable(opts);
       table.innerHTML = '';
-      assert.equal(table.outerHTML, '<table class="table table-bordered table-dark" disabled="false"></table>');
+      assert.equal(table.outerHTML, '<table class="table table-bordered table-dark"></table>');
     });
   });
   suite('thead', () => {
@@ -32,26 +32,26 @@ suite('#createTable', () => {
     test('у tr должны быть th', () => {
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const th = tr.querySelectorAll('th');
-      for (let i = 0; i < th.length; i += 1) {
-        th[i].innerHTML = '';
-        assert.equal(th[i].outerHTML, '<th class="th"></th>');
+      const ths = tr.querySelectorAll('th');
+      for (let i = 0; i < ths.length; i += 1) {
+        ths[i].innerHTML = '';
+        assert.equal(ths[i].outerHTML, '<th class="th"></th>');
       }
     });
     test('у th должен быть контент из columns', () => {
       opts.table.rows.data = [];
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const th = tr.querySelectorAll('th');
-      for (let i = 0; i < th.length; i += 1) {
-        assert.equal(th[i].outerHTML, `<th class="th">${opts.table.columns.data[i]}</th>`);
+      const ths = tr.querySelectorAll('th');
+      for (let i = 0; i < ths.length; i += 1) {
+        assert.equal(ths[i].outerHTML, `<th class="th">${opts.table.columns.data[i]}</th>`);
       }
     });
     test('у tr должен быть первый пустой th, если есть rows', () => {
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const th = tr.querySelectorAll('th');
-      assert.equal(th[0].outerHTML, '<th class="th"></th>');
+      const ths = tr.querySelectorAll('th');
+      assert.equal(ths[0].outerHTML, '<th class="th"></th>');
     });
   });
   suite('tbody', () => {
@@ -62,41 +62,41 @@ suite('#createTable', () => {
     });
     test('у tbody должны быть tr', () => {
       const tbody = createTable(opts).querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr');
-      for (let i = 0; i < tr.length; i += 1) {
-        tr[i].innerHTML = '';
-        assert.equal(tr[i].outerHTML, '<tr class="tr"></tr>');
+      const trs = tbody.querySelectorAll('tr');
+      for (let i = 0; i < trs.length; i += 1) {
+        trs[i].innerHTML = '';
+        assert.equal(trs[i].outerHTML, '<tr class="tr"></tr>');
       }
     });
-    test('у tr должны быть первыми th с контентом из columns', () => {
+    test('у tr должен быть первым th с контентом из columns', () => {
       const tbody = createTable(opts).querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr');
-      for (let i = 0; i < tr.length; i += 1) {
-        assert.equal(tr[i].firstChild.outerHTML, `<th class="th">${opts.table.rows.data[i]}</th>`);
+      const trs = tbody.querySelectorAll('tr');
+      for (let i = 0; i < trs.length; i += 1) {
+        assert.equal(trs[i].firstChild.outerHTML, `<th class="th">${opts.table.rows.data[i]}</th>`);
       }
     });
     test('у tr должны быть td', () => {
-      opts.table.tbody.td.content = '';
+      opts.events = [];
       const tbody = createTable(opts).querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr');
-      for (let i = 0; i < tr.length; i += 1) {
-        const td = tr[i].querySelectorAll('td');
-        for (let j = 0; j < td.length; j += 1) {
-          td.innerHTML = '';
-          assert.equal(td[i].outerHTML, '<td class="td"></td>');
+      const trs = tbody.querySelectorAll('tr');
+      for (let i = 0; i < trs.length; i += 1) {
+        const tds = trs[i].querySelectorAll('td');
+        for (let j = 0; j < tds.length; j += 1) {
+          tds[j].innerHTML = '';
+          assert.equal(tds[j].outerHTML, '<td class="td"></td>');
         }
       }
     });
     test('у td должен быть контент', () => {
+      opts.events = [];
       const tbody = createTable(opts).querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr');
-      for (let i = 0; i < tr.length; i += 1) {
-        const td = tr[i].querySelectorAll('td');
-        for (let j = 0; j < td.length; j += 1) {
-          assert.equal(td[i].outerHTML, `<td class="td">${opts.table.tbody.td.content}</td>`);
+      const trs = tbody.querySelectorAll('tr');
+      for (let i = 0; i < trs.length; i += 1) {
+        const tds = trs[i].querySelectorAll('td');
+        for (let j = 0; j < tds.length; j += 1) {
+          assert.equal(tds[j].outerHTML, '<td class="td">text</td>');
         }
       }
-      console.log(tbody.outerHTML);
     });
   });
 });
