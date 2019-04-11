@@ -1,0 +1,40 @@
+{
+  "breakpoint": "991px",
+  "container": "scheduler-container",
+  "indexing": false,
+  "table": {
+    "attributes": {},
+    "thead": {
+      "attributes": {},
+      "tr": {
+        "attributes": {}
+      },
+      "th": {
+        "attributes": {}
+      }
+    },
+    "tbody": {
+      "attributes": {},
+      "tr": {
+        "attributes": {}
+      },
+      "th": {
+        "attributes": {},
+        "remove": false,
+        "removeMobile": false
+      },
+      "td": {
+        "attributes": {}
+      }
+    },
+    "columns": {
+      "data": [],
+      "sort": false
+    },
+    "rows": {
+      "data": [],
+      "sort": false
+    }
+  },
+  "events": []
+}

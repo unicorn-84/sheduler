@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="RU-ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Scheduler</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="scheduler" class="my-3"></div>
+    </div>
+  </div>
+</div>
+<script src="scheduler.js"></script>
+<script>
+  window.scheduler({
+    breakpoint: '767px',
+    container: 'scheduler',
+    indexing: true,
+    table: {
+      attributes: {
+        id: 'id',
+        class: 'table table-bordered table-dark',
+        style: 'table-layout: fixed; border-collapse: separate; border-spacing: 1px',
+      },
+      thead: {
+        attributes: {
+          class: 'thead',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+        },
+        th: {
+          attributes: {
+            class: 'p-3 text-center text-truncate',
+            scope: 'col',
+          },
+        },
+      },
+      tbody: {
+        attributes: {
+          class: 'tbody',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+          removeEmpty: true,
+        },
+        th: {
+          attributes: {
+            class: 'align-middle text-center',
+            scope: 'row',
+          },
+          remove: true,
+          removeMobile: true,
+        },
+        td: {
+          attributes: {
+            class: 'text-wrap text-truncate text-center',
+          },
+        },
+      },
+      columns: {
+        data: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+      },
+      rows: {
+        data: ['09:00', '11:00', '10:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+        sort: true,
+      },
+    },
+    events: [
+      { column: 'Понедельник', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Среда', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Пятница', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Воскресенье', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Вторник', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Четверг', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Суббота', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Понедельник', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Среда', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Пятница', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Четверг', row: '15:00', content: 'Secondary', attributes: { class: 'bg-secondary' }},
+      { column: 'Пятница', row: '17:00', content: 'Success', attributes: { class: 'bg-success' }},
+      { column: 'Пятница', row: '18:00', content: 'Success', attributes: { class: 'bg-success' }},
+    ],
+  });
+</script>
+</body>
+</html>
