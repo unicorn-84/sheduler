@@ -14,7 +14,7 @@ suite('#createTable()', () => {
     test('должна вернуть table', () => {
       const table = createTable(opts);
       table.innerHTML = '';
-      assert.equal(table.outerHTML, '<table class="table table-bordered table-dark"></table>');
+      assert.equal(table.outerHTML, '<table id="id" class="table table-bordered table-dark"></table>');
     });
   });
   suite('thead', () => {
@@ -52,6 +52,13 @@ suite('#createTable()', () => {
       const tr = thead.querySelector('tr');
       const ths = tr.querySelectorAll('th');
       assert.equal(ths[0].outerHTML, '<th class="th"></th>');
+    });
+    test('должна не отображать первый th', () => {
+      opts.table.tbody.th.remove = true;
+      const thead = createTable(opts).querySelector('thead');
+      const tr = thead.querySelector('tr');
+      const ths = tr.querySelectorAll('th');
+      assert.equal(ths.length, opts.table.columns.data.length);
     });
   });
   suite('tbody', () => {
@@ -94,8 +101,16 @@ suite('#createTable()', () => {
       for (let i = 0; i < trs.length; i += 1) {
         const tds = trs[i].querySelectorAll('td');
         for (let j = 0; j < tds.length; j += 1) {
-          assert.equal(tds[j].outerHTML, '<td class="td">text</td>');
+          assert.equal(tds[j].outerHTML, '<td class="td">-</td>');
         }
+      }
+    });
+    test('должна не отображать th', () => {
+      opts.table.tbody.th.remove = true;
+      const tbody = createTable(opts).querySelector('tbody');
+      const trs = tbody.querySelectorAll('tr');
+      for (let i = 0; i < trs.length; i += 1) {
+        assert.notExists(trs[i].querySelector('th'));
       }
     });
   });

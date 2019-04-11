@@ -89,6 +89,16 @@ suite('#createMobileTable()', () => {
         assert.equal(ths[0].outerHTML, '<th class="th"></th>');
       }
     });
+    test('должна не отображать первый th', () => {
+      opts.table.tbody.th.removeMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        const thead = tables[i].querySelector('thead');
+        const tr = thead.querySelector('tr');
+        assert.equal(tr.outerHTML, `<tr class="tr"><th class="th">${opts.table.columns.data[i]}</th></tr>`);
+      }
+    });
   });
   suite('tbody', () => {
     test('у table должен быть tbody', () => {
@@ -146,8 +156,19 @@ suite('#createMobileTable()', () => {
         const trs = tbody.querySelectorAll('tr');
         for (let j = 0; j < trs.length; j += 1) {
           const td = trs[j].querySelector('td');
-          assert.equal(td.outerHTML, '<td class="td">text</td>');
+          assert.equal(td.outerHTML, '<td class="td">-</td>');
         }
+      }
+    });
+    test('должна не отображать th', () => {
+      opts.table.tbody.th.removeMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        const tbody = tables[i].querySelector('tbody');
+        const tr = tbody.querySelector('tr');
+        const th = tr.querySelector('th');
+        assert.notExists(th);
       }
     });
   });

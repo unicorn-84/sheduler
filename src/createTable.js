@@ -23,8 +23,8 @@ export default function createTable(opts) {
       tr = addAttributes(tr, opts.table.thead.tr.attributes);
     }
     let th;
-    // проверяем массив строк
-    if (opts.table.rows.data.length > 0) {
+    // проверяем массив строк и display
+    if (opts.table.rows.data.length > 0 && !opts.table.tbody.th.remove) {
       // создаем элемент th
       th = document.createElement('th');
       // проверяем пользовательские аттрибуты
@@ -69,16 +69,19 @@ export default function createTable(opts) {
       if (opts.table.tbody.tr.attributes) {
         tr = addAttributes(tr, opts.table.tbody.tr.attributes);
       }
-      // создаем элемент th
-      let th = document.createElement('th');
-      // проверяем пользовательские аттрибуты
-      if (opts.table.tbody.th.attributes) {
-        th = addAttributes(th, opts.table.tbody.th.attributes);
+      // проверяем display
+      if (!opts.table.tbody.th.remove) {
+        // создаем элемент th
+        let th = document.createElement('th');
+        // проверяем пользовательские аттрибуты
+        if (opts.table.tbody.th.attributes) {
+          th = addAttributes(th, opts.table.tbody.th.attributes);
+        }
+        // присваиваем значение из массива строк элементу th
+        th.textContent = opts.table.rows.data[i];
+        // добавляем элемент th в tr
+        tr.appendChild(th);
       }
-      // присваиваем значение из массива строк элементу th
-      th.textContent = opts.table.rows.data[i];
-      // добавляем элемент th в tr
-      tr.appendChild(th);
       // проходим по массиву колонок
       for (let j = 0; j < opts.table.columns.data.length; j += 1) {
         // создаем элемент td
@@ -87,8 +90,11 @@ export default function createTable(opts) {
         if (opts.table.tbody.td.attributes) {
           td = addAttributes(td, opts.table.tbody.td.attributes);
         }
-        // присваиваем значение заполнителя из опций элементу td
-        td.innerHTML = opts.table.tbody.td.content;
+        // проверяем content
+        if (opts.table.tbody.td.content) {
+          // присваиваем значение заполнителя из опций элементу td
+          td.innerHTML = opts.table.tbody.td.content;
+        }
         // добавляем элемент td в tr
         tr.appendChild(td);
       }

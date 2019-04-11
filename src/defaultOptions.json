@@ -19,11 +19,12 @@
         "attributes": {}
       },
       "th": {
-        "attributes": {}
+        "attributes": {},
+        "remove": false,
+        "removeMobile": false
       },
       "td": {
-        "attributes": {},
-        "content": ""
+        "attributes": {}
       }
     },
     "columns": {

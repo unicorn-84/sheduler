@@ -30,17 +30,20 @@ export default {
         attributes: {
           class: 'tr',
         },
+        removeEmpty: false,
       },
       th: {
         attributes: {
           class: 'th',
         },
+        remove: false,
+        removeMobile: false,
       },
       td: {
         attributes: {
           class: 'td',
         },
-        content: 'text',
+        content: '-',
       },
     },
     columns: {
@@ -60,7 +63,7 @@ export default {
       },
       column: 'anna',
       row: 'vue',
-      content: '<i class="fas fa-meh fa-2x text-warning"></i>',
+      content: '+',
     },
   ],
 };
