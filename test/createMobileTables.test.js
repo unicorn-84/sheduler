@@ -19,6 +19,21 @@ suite('#createMobileTable()', () => {
         assert.equal(tables[i].outerHTML, '<table class="table table-bordered table-dark"></table>');
       }
     });
+    test('у table не должно быть id', () => {
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        assert.isFalse(tables[i].hasAttribute('id'));
+      }
+    });
+    test('у table должен быть data-index', () => {
+      opts.indexing = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        assert.equal(tables[i].getAttribute('data-index'), i);
+      }
+    });
   });
   suite('thead', () => {
     test('у table должен быть thead', () => {

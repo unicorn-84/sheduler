@@ -9,7 +9,18 @@ export default function createMobileTables(opts) {
     let table = document.createElement('table');
     // проверяем пользовательские аттрибуты
     if (opts.table.attributes) {
-      table = addAttributes(table, opts.table.attributes);
+      if (opts.table.attributes.id) {
+        const opt = Object.assign({}, opts.table.attributes);
+        opt.id = null;
+        table = addAttributes(table, opt);
+      } else {
+        table = addAttributes(table, opts.table.attributes);
+      }
+    }
+    // проверяем indexing
+    if (opts.indexing) {
+      // задаем индекс
+      table.setAttribute('data-index', String(i));
     }
     // THEAD
     // создаем элемент thead

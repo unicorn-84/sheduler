@@ -9,12 +9,12 @@ export default function createColumnsAndRows(opts) {
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
     // проверям свойство column события в массиве колонок
-    if (data.columns.indexOf(opts.events[i].column) === -1) {
+    if (opts.events[i].column && data.columns.indexOf(opts.events[i].column) === -1) {
       // если нет, пушим
       data.columns.push(opts.events[i].column);
     }
     // проверям свойство row события в массиве строк
-    if (data.rows.indexOf(opts.events[i].row) === -1) {
+    if (opts.events[i].row && data.rows.indexOf(opts.events[i].row) === -1) {
       // если нет, пушим
       data.rows.push(opts.events[i].row);
     }

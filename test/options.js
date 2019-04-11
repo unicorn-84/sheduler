@@ -1,8 +1,10 @@
 export default {
   breakpoint: '991px',
   container: 'scheduler-container',
+  indexing: false,
   table: {
     attributes: {
+      id: 'id',
       class: 'table table-bordered table-dark',
     },
     thead: {

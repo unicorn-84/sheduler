@@ -6,10 +6,15 @@
   <title>Scheduler</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <style>
-    thead tr th:first-child {
+    #scheduler table thead th:first-child {
       width: 10%;
+    }
+
+    @media (max-width: 767px) {
+      #scheduler table thead th:first-child {
+        width: 15%;
+      }
     }
   </style>
 </head>
@@ -17,266 +22,81 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div id="simple-table" class="my-3"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div id="simple-schedule" class="my-3"></div>
+      <div id="scheduler" class="my-3"></div>
     </div>
   </div>
 </div>
 <script src="scheduler.js"></script>
 <script>
-  // Простая таблица
   window.scheduler({
-    container: 'simple-table',
+    breakpoint: '767px',
+    container: 'scheduler',
+    indexing: true,
     table: {
       attributes: {
-        class: 'table table-bordered bg-light text-center text-uppercase',
-      },
-      thead: {
-        th: {
-          attributes: {
-            class: 'p-3 font-italic',
-          }
-        }
-      },
-      tbody: {
-        th: {
-          attributes: {
-            class: 'align-middle font-italic',
-          }
-        },
-        td: {
-          attributes: {
-            class: 'text-center p-3 text-secondary align-middle',
-          },
-          content: '-'
-        }
-      },
-      columns: {
-        sort: true,
-      },
-      rows: {
-        sort: true,
-      },
-    },
-    events: [
-      {
-        column: 'Анна',
-        row: 'JS',
-        content: '<i class="fas fa-meh fa-2x text-warning"></i>'
-      },
-      {
-        column: 'Иван',
-        row: 'RUBY',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
-      },
-      {
-        column: 'Иван',
-        row: 'JAVA',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
-      },
-      {
-        column: 'Петр',
-        row: 'JS',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
-      },
-      {
-        column: 'Петр',
-        row: 'PHP',
-        content: '<i class="fas fa-smile fa-2x text-success"></i>'
-      },
-      {
-        column: 'Влад',
-        row: 'JAVA',
-        content: '<i class="fas fa-meh fa-2x text-warning"></i>'
-      },
-      {
-        column: 'Евгений',
-        row: 'JAVA',
-        content: '<i class="fas fa-meh fa-2x text-warning"></i>'
-      }
-    ],
-  });
-  // Простое расписание
-  function makeContent(direction, time, coach) {
-    return `<h4 class="m-0"><a href="#" class="text-reset"> ${direction}</a></h4><div><small>${time}</small></div><h6 class="m-0"><a href="#" class="text-reset">${coach}</a></h6>`;
-  }
-  window.scheduler({
-    container: 'simple-schedule',
-    table: {
-      attributes: {
+        id: 'id',
         class: 'table table-bordered table-dark',
         style: 'table-layout: fixed; border-collapse: separate; border-spacing: 1px',
       },
       thead: {
+        attributes: {
+          class: 'thead',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+        },
         th: {
           attributes: {
-            class: 'p-3 text-center',
-          }
-        }
+            class: 'p-3 text-center text-truncate',
+            scope: 'col',
+          },
+        },
       },
       tbody: {
+        attributes: {
+          class: 'tbody',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+        },
         th: {
           attributes: {
             class: 'align-middle text-center',
-          }
+            scope: 'row',
+          },
+        },
+        td: {
+          attributes: {
+            class: 'text-wrap text-truncate text-center',
+          },
         },
       },
       columns: {
         data: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
       },
       rows: {
+        data: ['09:00', '11:00', '10:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
         sort: true,
       },
     },
     events: [
-      {
-        attributes: {
-          class: 'bg-info',
-        },
-        column: 'Понедельник',
-        row: '10:00',
-        content: makeContent('Stretching', '10:00-11:00', 'Анна'),
-      },
-      {
-        attributes: {
-          class: 'bg-info',
-        },
-        column: 'Среда',
-        row: '10:00',
-        content: makeContent('Stretching', '10:00-11:00', 'Анна'),
-      },
-      {
-        attributes: {
-          class: 'bg-info',
-        },
-        column: 'Пятница',
-        row: '10:00',
-        content: makeContent('Stretching', '10:00-11:00', 'Анна'),
-      },
-      {
-        attributes: {
-          class: 'bg-info',
-        },
-        column: 'Воскресенье',
-        row: '10:00',
-        content: makeContent('Stretching', '10:00-11:00', 'Анна'),
-      },
-      {
-        attributes: {
-          class: 'bg-success',
-        },
-        column: 'Вторник',
-        row: '09:00',
-        content: makeContent('Zumba', '09:00-10:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-success',
-        },
-        column: 'Вторник',
-        row: '10:00',
-        content: makeContent('Zumba', '10:00-11:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-success',
-        },
-        column: 'Суббота',
-        row: '10:00',
-        content: makeContent('Zumba', '10:00-11:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-success',
-        },
-        column: 'Суббота',
-        row: '11:00',
-        content: makeContent('Zumba', '11:00-12:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-warning',
-        },
-        column: 'Четверг',
-        row: '12:00',
-        content: makeContent('Йога', '12:00-13:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-warning',
-        },
-        column: 'Четверг',
-        row: '13:00',
-        content: makeContent('Йога', '13:00-14:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-warning',
-        },
-        column: 'Воскресенье',
-        row: '13:00',
-        content: makeContent('Йога', '13:00-14:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-warning',
-        },
-        column: 'Воскресенье',
-        row: '14:00',
-        content: makeContent('Йога', '14:00-15:00', 'Иван'),
-      },
-      {
-        attributes: {
-          class: 'bg-secondary',
-        },
-        column: 'Вторник',
-        row: '15:00',
-        content: makeContent('Pole Dance', '15:00-16:00', 'Лена'),
-      },
-      {
-        attributes: {
-          class: 'bg-secondary',
-        },
-        column: 'Четверг',
-        row: '15:00',
-        content: makeContent('Pole Dance', '15:00-16:00', 'Лена'),
-      },
-      {
-        attributes: {
-          class: 'bg-secondary',
-        },
-        column: 'Суббота',
-        row: '15:00',
-        content: makeContent('Pole Dance', '15:00-16:00', 'Лена'),
-      },
-      {
-        attributes: {
-          class: 'bg-primary',
-        },
-        column: 'Понедельник',
-        row: '17:00',
-        content: makeContent('Super Sculpt', '17:00-18:00', 'Антон'),
-      },
-      {
-        attributes: {
-          class: 'bg-primary',
-        },
-        column: 'Вторник',
-        row: '16:00',
-        content: makeContent('Super Sculpt', '16:00-17:00', 'Антон'),
-      },
-      {
-        attributes: {
-          class: 'bg-primary',
-        },
-        column: 'Пятница',
-        row: '18:00',
-        content: makeContent('Super Sculpt', '18:00-19:00', 'Антон'),
-      },
+      { column: 'Понедельник', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Среда', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Пятница', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Воскресенье', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      { column: 'Вторник', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Четверг', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Суббота', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      { column: 'Понедельник', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Среда', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Пятница', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      { column: 'Четверг', row: '15:00', content: 'Secondary', attributes: { class: 'bg-secondary' }},
+      { column: 'Пятница', row: '17:00', content: 'Success', attributes: { class: 'bg-success' }},
+      { column: 'Пятница', row: '18:00', content: 'Success', attributes: { class: 'bg-success' }},
     ],
   });
 </script>
