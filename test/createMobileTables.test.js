@@ -34,6 +34,12 @@ suite('#createMobileTable()', () => {
         assert.equal(tables[i].getAttribute('data-index'), i);
       }
     });
+    test('должна не отображать table', () => {
+      opts.table.removeEmptyMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      assert.equal(tables.length, 1);
+    });
   });
   suite('thead', () => {
     test('у table должен быть thead', () => {
@@ -170,6 +176,17 @@ suite('#createMobileTable()', () => {
         const th = tr.querySelector('th');
         assert.notExists(th);
       }
+    });
+    test('должна не отображать tr', () => {
+      opts.table.tbody.tr.removeEmptyMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      let tbody = tables[0].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
+      tbody = tables[1].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
+      tbody = tables[2].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><th class="th">vue</th><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
     });
   });
 });

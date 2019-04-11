@@ -1,4 +1,5 @@
 export default {
+  breakpoint: null,
   container: 'scheduler-container',
   indexing: false,
   table: {
@@ -30,6 +31,7 @@ export default {
           class: 'tr',
         },
         removeEmpty: false,
+        removeEmptyMobile: false,
       },
       th: {
         attributes: {
@@ -53,6 +55,7 @@ export default {
       data: ['vue', 'polymer', 'react'],
       sort: false,
     },
+    removeEmptyMobile: false,
   },
   events: [
     {

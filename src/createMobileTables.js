@@ -3,6 +3,7 @@ import addAttributes from './addAttributes';
 export default function createMobileTables(opts) {
   // создаем DocumentFragment
   const fragment = document.createDocumentFragment();
+
   // проходим по массиву колонок
   for (let i = 0; i < opts.table.columns.data.length; i += 1) {
     // создаем элемент table
@@ -36,7 +37,7 @@ export default function createMobileTables(opts) {
       tr = addAttributes(tr, opts.table.thead.tr.attributes);
     }
     let th;
-    // проверяем массив строк и display
+    // проверяем массив строк и removeMobile для th
     if (opts.table.rows.data.length > 0 && !opts.table.tbody.th.removeMobile) {
       // создаем элемент th
       th = document.createElement('th');
@@ -76,7 +77,7 @@ export default function createMobileTables(opts) {
       if (opts.table.tbody.tr.attributes) {
         tr = addAttributes(tr, opts.table.tbody.tr.attributes);
       }
-      // проверяем display
+      // проверяем removeMobile для th
       if (!opts.table.tbody.th.removeMobile) {
         // создаем элемент th
         th = document.createElement('th');
@@ -110,6 +111,13 @@ export default function createMobileTables(opts) {
     // добавляем элемент table в DocumentFragment
     fragment.appendChild(table);
   }
+
+  // создаем virtTables
+  const virtTables = new Array(opts.table.columns.data.length);
+  for (let i = 0; i < virtTables.length; i += 1) {
+    virtTables[i] = new Array(opts.table.rows.data.length);
+  }
+
   // EVENTS
   // todo: Добавить проверку на совпадение
   // проходим по массиву событий
@@ -124,6 +132,8 @@ export default function createMobileTables(opts) {
       const tbody = table.querySelector('tbody');
       // находим в tbody tr с совпавшим значением строки
       const tr = tbody.querySelectorAll('tr')[rowIndex];
+      // заполняем virtTables
+      virtTables[columnIndex][rowIndex] = true;
       // находим td в tr
       let td = tr.querySelector('td');
       // проверяем пользовательские аттрибуты у события
@@ -134,5 +144,53 @@ export default function createMobileTables(opts) {
       td.innerHTML = opts.events[i].content;
     }
   }
+
+  // проверяем removeEmptyMobile для table
+  if (opts.table.removeEmptyMobile) {
+    // находим таблицы
+    const tables = fragment.querySelectorAll('table');
+    // проходим по virtTables
+    const clone = virtTables.slice(0);
+    label: // eslint-disable-line
+    for (let i = 0; i < clone.length; i += 1) {
+      // проходим по вложенным массивам
+      for (let j = 0; j < clone[i].length; j += 1) {
+        // если true, значит таблица не пустая
+        if (clone[i][j] === true) {
+          // выходим по метке :-\
+          continue label; // eslint-disable-line
+        }
+      }
+      // все строки пусты
+      // удаляем таблицу
+      tables[i].remove();
+      // удаляем из virtTables
+      virtTables.splice(i, 1);
+    }
+  }
+
+  // проверяем removeEmptyMobile для tr в tbody
+  if (opts.table.tbody.tr.removeEmptyMobile) {
+    // находим таблицы
+    const tables = fragment.querySelectorAll('table');
+    // проходим по virtTables
+    const clone = virtTables.slice(0);
+    for (let i = 0; i < clone.length; i += 1) {
+      // находим строки
+      const tbody = tables[i].querySelector('tbody');
+      const trs = tbody.querySelectorAll('tr');
+      // проходим по вложенным массивам
+      for (let j = 0; j < clone[i].length; j += 1) {
+        // если empty, значит пустая строка
+        if (!clone[i][j]) {
+          // удаляем строку из таблицы
+          trs[j].remove();
+          // удаляем из virtTables
+          // virtTables[i].splice(j, 1);
+        }
+      }
+    }
+  }
+
   return fragment;
 }

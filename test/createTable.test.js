@@ -113,5 +113,10 @@ suite('#createTable()', () => {
         assert.notExists(trs[i].querySelector('th'));
       }
     });
+    test('должна не отображать пустые строки', () => {
+      opts.table.tbody.tr.removeEmpty = true;
+      const tbody = createTable(opts).querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><th class="th">vue</th><td class="td">-</td><td class="td">-</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
+    });
   });
 });

@@ -101,6 +101,11 @@ export default function createTable(opts) {
       // добавляем элемент tr в tbody
       tbody.appendChild(tr);
     }
+    // проверяем removeEmpty
+    let virtRows;
+    if (opts.table.tbody.tr.removeEmpty) {
+      virtRows = new Array(opts.table.rows.data.length);
+    }
     // EVENTS
     // todo: Добавить проверку на совпадение
     // проходим по массиву событий
@@ -111,6 +116,11 @@ export default function createTable(opts) {
       if (rowIndex !== -1 && columnIndex !== -1) {
         // находим строку
         const tr = tbody.querySelectorAll('tr')[rowIndex];
+        // проверяем virtRows
+        if (virtRows) {
+          // в строке есть событие
+          virtRows[rowIndex] = true;
+        }
         // находим колонку
         let td = tr.querySelectorAll('td')[columnIndex];
         // проверяем пользовательские аттрибуты
@@ -119,6 +129,18 @@ export default function createTable(opts) {
         }
         // присваиваем значение события td
         td.innerHTML = opts.events[i].content;
+      }
+    }
+    // проверяем virtRows
+    if (virtRows) {
+      const trs = tbody.querySelectorAll('tr');
+      // проходим по virtRows
+      for (let i = 0; i < virtRows.length; i += 1) {
+        // если empty, значит пустая строка
+        if (!virtRows[i]) {
+          // находим и удаляем строку
+          trs[i].remove();
+        }
       }
     }
     // добавляем элемент tbody в table
