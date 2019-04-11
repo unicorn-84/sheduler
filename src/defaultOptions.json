@@ -1,7 +1,5 @@
 {
-  "breakpoint": "991px",
   "container": "scheduler-container",
-  "indexing": false,
   "table": {
     "attributes": {},
     "thead": {
@@ -19,21 +17,17 @@
         "attributes": {}
       },
       "th": {
-        "attributes": {},
-        "remove": false,
-        "removeMobile": false
+        "attributes": {}
       },
       "td": {
         "attributes": {}
       }
     },
     "columns": {
-      "data": [],
-      "sort": false
+      "data": []
     },
     "rows": {
-      "data": [],
-      "sort": false
+      "data": []
     }
   },
   "events": []

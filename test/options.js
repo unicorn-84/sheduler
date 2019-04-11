@@ -1,5 +1,4 @@
 export default {
-  breakpoint: '991px',
   container: 'scheduler-container',
   indexing: false,
   table: {

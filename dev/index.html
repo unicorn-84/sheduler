@@ -18,7 +18,7 @@
 <script src="scheduler.js"></script>
 <script>
   window.scheduler({
-    breakpoint: '767px',
+    breakpoint: '991px',
     container: 'scheduler',
     indexing: true,
     table: {
@@ -29,7 +29,7 @@
       },
       thead: {
         attributes: {
-          class: 'thead',
+          class: 'thead d-none',
         },
         tr: {
           attributes: {
@@ -58,8 +58,8 @@
             class: 'align-middle text-center',
             scope: 'row',
           },
-          remove: true,
-          removeMobile: true,
+          // remove: true,
+          // removeMobile: true,
         },
         td: {
           attributes: {
@@ -76,19 +76,19 @@
       },
     },
     events: [
-      { column: 'Понедельник', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
-      { column: 'Среда', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
-      { column: 'Пятница', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
-      { column: 'Воскресенье', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
-      { column: 'Вторник', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
-      { column: 'Четверг', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
-      { column: 'Суббота', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
-      { column: 'Понедельник', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
-      { column: 'Среда', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
-      { column: 'Пятница', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
-      { column: 'Четверг', row: '15:00', content: 'Secondary', attributes: { class: 'bg-secondary' }},
-      { column: 'Пятница', row: '17:00', content: 'Success', attributes: { class: 'bg-success' }},
-      { column: 'Пятница', row: '18:00', content: 'Success', attributes: { class: 'bg-success' }},
+      // { column: 'Понедельник', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      // { column: 'Среда', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      // { column: 'Пятница', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      // { column: 'Воскресенье', row: '09:00', content: 'Info', attributes: { class: 'bg-info' }},
+      // { column: 'Вторник', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      // { column: 'Четверг', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      // { column: 'Суббота', row: '11:00', content: 'Danger', attributes: { class: 'bg-danger' }},
+      // { column: 'Понедельник', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      // { column: 'Среда', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      // { column: 'Пятница', row: '13:00', content: 'Primary', attributes: { class: 'bg-primary' }},
+      // { column: 'Четверг', row: '15:00', content: 'Secondary', attributes: { class: 'bg-secondary' }},
+      // { column: 'Пятница', row: '17:00', content: 'Success', attributes: { class: 'bg-success' }},
+      // { column: 'Пятница', row: '18:00', content: 'Success', attributes: { class: 'bg-success' }},
     ],
   });
 </script>
