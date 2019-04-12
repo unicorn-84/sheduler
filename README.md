@@ -3,7 +3,6 @@
 >*size: 4 Kb*  
 ### Usage
 ```html
-<div id="scheduler-container"></div>
 <script src="scheduler.min.js"></script>
 <script>
   window.scheduler({
@@ -20,12 +19,12 @@
       {
         column: 'Anna',
         row: 'Vue',
-        content: '<h3>😃</h3>',       
+        content: '<span>😃</span>',       
       },
       {
         column: 'Ivan',
         row: 'React',
-        content: '<h3>😕</h3>',
+        content: '<span>😕</span>',
       },
     ],
   });
@@ -33,42 +32,40 @@
 
 // =>
 
-<div id="scheduler-container">
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Petr</th>
-        <th>Ivan</th>
-        <th>Anna</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Polymer</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th>Vue</th>
-        <td></td>
-        <td></td>
-        <td>
-          <h3>😃</h3>
-        </td>
-      </tr>
-      <tr>
-        <th>React</th>
-        <td></td>
-        <td>
-          <h3>😕</h3>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Petr</th>
+      <th>Ivan</th>
+      <th>Anna</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Polymer</th>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Vue</th>
+      <td></td>
+      <td></td>
+      <td>
+        <span>😃</span>
+      </td>
+    </tr>
+    <tr>
+      <th>React</th>
+      <td></td>
+      <td>
+        <span>😕</span>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 ```
 ## API
 ### schema
@@ -172,8 +169,115 @@ Type: `Array`
 Default: `[]`  
 Массив строк
 #### sort 
+Type: `Boolean`  
+Default: `false`  
 Отображать в отсортированном виде
 #### events
 Type: `Array`  
 Default: `[]`  
 Массив объектов событий
+## Mobile version
+Если breakpoint определено, тогда при browser viewport width <= breakpoint, из каждой колонки будет создана отдельная таблица
+```html
+<div id="scheduler-container"></div>
+<script src="scheduler.min.js"></script>
+<script>
+  window.scheduler({
+    breakpoint: '767px',
+    indexing: true,
+    table: {
+      columns: {
+        data: ['Petr', 'Ivan'],
+      },
+      rows: {
+        data: ['Polymer'],
+      },
+    },
+    events: [
+      {
+        column: 'Anna',
+        row: 'Vue',
+        content: '<span>😃</span>',       
+      },
+      {
+        column: 'Ivan',
+        row: 'React',
+        content: '<span>😕</span>',
+      },
+    ],
+  });
+</script>
+
+//=> 
+browser viewport width <= '767px'
+
+<table data-index="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Petr</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Polymer</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Vue</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>React</th>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<table data-index="1">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Ivan</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Polymer</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Vue</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>React</th>
+      <td><span>😕</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<table data-index="2">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Anna</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Polymer</th>
+      <td></td>
+    </tr>
+    <tr>
+      <th>Vue</th>
+      <td><span>😃</span></td>
+    </tr>
+    <tr>
+      <th>React</th>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+```
+## [Examples](https://github.com/unicorn-84/sheduler/tree/master/examples)
