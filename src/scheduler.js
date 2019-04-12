@@ -22,8 +22,12 @@ export default function scheduler(options) {
   // присваиваем массивы колонок и строк
   opts.table.columns.data = columns;
   opts.table.rows.data = rows;
-  // создаем объект MediaQueryList
-  const mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
+  // проверяем breakpoint
+  let mql = {};
+  if (opts.breakpoint) {
+    // создаем объект MediaQueryList
+    mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
+  }
   function screenTest(e = {}) {
     // очищаем container
     container.innerHTML = '';
@@ -36,7 +40,10 @@ export default function scheduler(options) {
       container.appendChild(createTable(opts));
     }
   }
-  // добавляем слушатель на изменение статуса media query
-  mql.addListener(screenTest);
+  // проверяем breakpoint
+  if (opts.breakpoint) {
+    // добавляем слушатель на изменение статуса media query
+    mql.addListener(screenTest);
+  }
   screenTest();
 }

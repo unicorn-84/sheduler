@@ -26,18 +26,20 @@ suite('#scheduler()', () => {
     assert.notEqual(container.getElementsByTagName('table').length, 0);
   });
   test('должна добавлять table в container, если viewport > breakpoint', () => {
-    window.resizeTo(Number(opts.breakpoint.slice(0, -2)) + 1);
+    opts.breakpoint = '991px';
     window.scheduler(opts);
     assert.equal(container.getElementsByTagName('table').length, 1);
     window.resizeTo(1024);
   });
   test('должна добавлять tables в container, если viewport <= breakpoint', () => {
-    window.resizeTo(Number(opts.breakpoint.slice(0, -2)));
+    window.resizeTo(768);
+    opts.breakpoint = '991px';
     window.scheduler(opts);
     assert.equal(container.getElementsByTagName('table').length, 3);
     window.resizeTo(1024);
   });
   test('должна менять таблицы при смене размеров viewport', () => {
+    opts.breakpoint = '991px';
     window.scheduler(opts);
     assert.equal(container.getElementsByTagName('table').length, 1);
     window.resizeTo(540);
