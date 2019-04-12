@@ -11,86 +11,35 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <div id="scheduler" class="my-3"></div>
+      <div id="scheduler-container" class="my-3"></div>
     </div>
   </div>
 </div>
 <script src="scheduler.js"></script>
-<script>
+<<script>
   window.scheduler({
-    breakpoint: '991px',
-    container: 'scheduler',
+    breakpoint: '767px',
     indexing: true,
+    container: 'scheduler-container',
     table: {
-      attributes: {
-        id: 'id',
-        class: 'table table-bordered table-dark',
-        style: 'table-layout: fixed; border-collapse: separate; border-spacing: 1px',
-      },
-      thead: {
-        attributes: {
-          class: 'thead',
-        },
-        tr: {
-          attributes: {
-            class: 'tr',
-          },
-        },
-        th: {
-          attributes: {
-            class: 'p-3 text-center text-truncate',
-            scope: 'col',
-          },
-        },
-      },
-      tbody: {
-        attributes: {
-          class: 'tbody',
-        },
-        tr: {
-          attributes: {
-            class: 'tr',
-          },
-          removeEmpty: false,
-          removeEmptyMobile: false,
-        },
-        th: {
-          attributes: {
-            class: 'align-middle text-center',
-            scope: 'row',
-          },
-          remove: false,
-          removeMobile: false,
-        },
-        td: {
-          attributes: {
-            class: 'text-wrap text-truncate text-center',
-          },
-          content: '-',
-        },
-      },
       columns: {
-        data: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+        data: ['Petr', 'Ivan'],
       },
       rows: {
-        data: ['09:00', '11:00', '10:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
-        sort: true,
+        data: ['Polymer'],
       },
-      removeEmptyMobile: false,
     },
     events: [
-      { column: 'Понедельник', row: '09:00', content: 'Понедельник 09:00', attributes: { class: 'bg-info' } },
-      { column: 'Среда', row: '09:00', content: 'Среда 09:00', attributes: { class: 'bg-info' } },
-      { column: 'Пятница', row: '09:00', content: 'Пятница 09:00', attributes: { class: 'bg-info' } },
-      { column: 'Воскресенье', row: '09:00', content: 'Воскресенье 09:00', attributes: { class: 'bg-info' } },
-      { column: 'Четверг', row: '11:00', content: 'Четверг 11:00', attributes: { class: 'bg-danger' } },
-      { column: 'Суббота', row: '11:00', content: 'Суббота 11:00', attributes: { class: 'bg-danger' } },
-      { column: 'Понедельник', row: '13:00', content: 'Понедельник 13:00', attributes: { class: 'bg-primary' } },
-      { column: 'Среда', row: '13:00', content: 'Среда 13:00', attributes: { class: 'bg-primary' } },
-      { column: 'Пятница', row: '13:00', content: 'Пятница 13:00', attributes: { class: 'bg-primary' } },
-      { column: 'Четверг', row: '15:00', content: 'Четверг 15:00', attributes: { class: 'bg-secondary' } },
-      { column: 'Пятница', row: '17:00', content: 'Пятница 17:00', attributes: { class: 'bg-success' } },
-      { column: 'Пятница', row: '18:00', content: 'Пятница 18:00', attributes: { class: 'bg-success' } },
+      {
+        column: 'Anna',
+        row: 'Vue',
+        content: '<h3>😃</h3>',
+      },
+      {
+        column: 'Ivan',
+        row: 'React',
+        content: '<h3>😕</h3>',
+      },
     ],
   });
 </script>
