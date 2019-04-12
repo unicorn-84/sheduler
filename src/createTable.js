@@ -23,7 +23,7 @@ export default function createTable(opts) {
       tr = addAttributes(tr, opts.table.thead.tr.attributes);
     }
     let th;
-    // проверяем массив строк и display
+    // проверяем массив строк и remove
     if (opts.table.rows.data.length > 0 && !opts.table.tbody.th.remove) {
       // создаем элемент th
       th = document.createElement('th');
@@ -69,7 +69,7 @@ export default function createTable(opts) {
       if (opts.table.tbody.tr.attributes) {
         tr = addAttributes(tr, opts.table.tbody.tr.attributes);
       }
-      // проверяем display
+      // проверяем remove
       if (!opts.table.tbody.th.remove) {
         // создаем элемент th
         let th = document.createElement('th');
@@ -104,6 +104,7 @@ export default function createTable(opts) {
     // проверяем removeEmpty
     let virtRows;
     if (opts.table.tbody.tr.removeEmpty) {
+    //  создаем empty массив
       virtRows = new Array(opts.table.rows.data.length);
     }
     // EVENTS
@@ -118,7 +119,7 @@ export default function createTable(opts) {
         const tr = tbody.querySelectorAll('tr')[rowIndex];
         // проверяем virtRows
         if (virtRows) {
-          // в строке есть событие
+          // в строке есть событие, изменяем virtRows
           virtRows[rowIndex] = true;
         }
         // находим колонку
