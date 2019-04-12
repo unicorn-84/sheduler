@@ -125,6 +125,7 @@
   ]
 }
 ```
+
 ### scheduler(options)
 #### options
 Type: `Object`
