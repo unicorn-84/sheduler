@@ -47,19 +47,19 @@ suite('#createTable()', () => {
         assert.equal(ths[i].outerHTML, `<th class="th">${opts.table.columns.data[i]}</th>`);
       }
     });
-    test('у tr должен быть первый пустой th, если есть rows', () => {
+    test('у tr должен быть первый пустой td, если есть rows', () => {
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const ths = tr.querySelectorAll('th');
-      assert.equal(ths[0].outerHTML, '<th class="th"></th>');
+      const tds = tr.querySelectorAll('td');
+      assert.equal(tds[0].outerHTML, '<td class="td"></td>');
     });
-    test('должна не отображать первый th', () => {
-      opts.table.tbody.th.remove = true;
-      const thead = createTable(opts).querySelector('thead');
-      const tr = thead.querySelector('tr');
-      const ths = tr.querySelectorAll('th');
-      assert.equal(ths.length, opts.table.columns.data.length);
-    });
+    // test('должна не отображать первый td', () => {
+    //   opts.table.tbody.td.remove = true;
+    //   const thead = createTable(opts).querySelector('thead');
+    //   const tr = thead.querySelector('tr');
+    //   const tds = tr.querySelectorAll('td');
+    //   assert.equal(tds.length, opts.table.columns.data.length);
+    // });
   });
   suite('tbody', () => {
     test('у table должен быть tbody', () => {
@@ -75,11 +75,11 @@ suite('#createTable()', () => {
         assert.equal(trs[i].outerHTML, '<tr class="tr"></tr>');
       }
     });
-    test('у tr должен быть первым th с контентом из columns', () => {
+    test('у tr должен быть первым td с контентом из columns', () => {
       const tbody = createTable(opts).querySelector('tbody');
       const trs = tbody.querySelectorAll('tr');
       for (let i = 0; i < trs.length; i += 1) {
-        assert.equal(trs[i].firstChild.outerHTML, `<th class="th">${opts.table.rows.data[i]}</th>`);
+        assert.equal(trs[i].firstChild.outerHTML, `<td class="td">${opts.table.rows.data[i]}</td>`);
       }
     });
     test('у tr должны быть td', () => {
@@ -100,23 +100,23 @@ suite('#createTable()', () => {
       const trs = tbody.querySelectorAll('tr');
       for (let i = 0; i < trs.length; i += 1) {
         const tds = trs[i].querySelectorAll('td');
-        for (let j = 0; j < tds.length; j += 1) {
+        for (let j = 1; j < tds.length; j += 1) {
           assert.equal(tds[j].outerHTML, '<td class="td">-</td>');
         }
       }
     });
-    test('должна не отображать th', () => {
-      opts.table.tbody.th.remove = true;
-      const tbody = createTable(opts).querySelector('tbody');
-      const trs = tbody.querySelectorAll('tr');
-      for (let i = 0; i < trs.length; i += 1) {
-        assert.notExists(trs[i].querySelector('th'));
-      }
-    });
+    // test('должна не отображать th', () => {
+    //   opts.table.tbody.th.remove = true;
+    //   const tbody = createTable(opts).querySelector('tbody');
+    //   const trs = tbody.querySelectorAll('tr');
+    //   for (let i = 0; i < trs.length; i += 1) {
+    //     assert.notExists(trs[i].querySelector('th'));
+    //   }
+    // });
     test('должна не отображать пустые строки', () => {
       opts.table.tbody.tr.removeEmpty = true;
       const tbody = createTable(opts).querySelector('tbody');
-      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><th class="th">vue</th><td class="td">-</td><td class="td">-</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">vue</td><td class="td">-</td><td class="td">-</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
     });
   });
 });

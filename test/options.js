@@ -1,7 +1,4 @@
 export default {
-  breakpoint: null,
-  container: 'scheduler-container',
-  indexing: false,
   table: {
     attributes: {
       id: 'id',
@@ -16,9 +13,9 @@ export default {
           class: 'tr',
         },
       },
-      th: {
+      td: {
         attributes: {
-          class: 'th',
+          class: 'td',
         },
       },
     },
@@ -30,15 +27,6 @@ export default {
         attributes: {
           class: 'tr',
         },
-        removeEmpty: false,
-        removeEmptyMobile: false,
-      },
-      th: {
-        attributes: {
-          class: 'th',
-        },
-        remove: false,
-        removeMobile: false,
       },
       td: {
         attributes: {
@@ -49,13 +37,11 @@ export default {
     },
     columns: {
       data: ['vlad', 'ivan', 'anna'],
-      sort: false,
     },
     rows: {
       data: ['vue', 'polymer', 'react'],
       sort: false,
     },
-    removeEmptyMobile: false,
   },
   events: [
     {

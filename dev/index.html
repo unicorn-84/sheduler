@@ -18,30 +18,59 @@
 <script src="scheduler.js"></script>
 <script>
   window.scheduler({
-    breakpoint: '767px',
-    indexing: true,
     table: {
+      attributes: {
+        id: 'id',
+        class: 'table table-bordered table-dark',
+      },
+      thead: {
+        attributes: {
+          class: 'thead',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+        },
+        td: {
+          attributes: {
+            class: 'td',
+          },
+        },
+      },
+      tbody: {
+        attributes: {
+          class: 'tbody',
+        },
+        tr: {
+          attributes: {
+            class: 'tr',
+          },
+        },
+        td: {
+          attributes: {
+            class: 'td',
+          },
+          content: '-',
+        },
+      },
       columns: {
-        data: ['Petr', 'Ivan'],
+        data: ['vlad', 'ivan', 'anna'],
       },
       rows: {
-        data: ['Polymer'],
+        data: ['vue', 'polymer', 'react'],
+        sort: false,
       },
     },
     events: [
       {
-        column: 'Anna',
-        row: 'Vue',
-        content: '<h3>😃</h3>',
-        parents: [
-          { selector: 'tr', attributes: { class: 'ok' } },
-          { selector: 'table', attributes: { class: 'ok' } },
-        ],
-      },
-      {
-        column: 'Ivan',
-        row: 'React',
-        content: '<h3>😕</h3>',
+        attributes: {
+          class: 'bg-dark',
+          'data-column': 'anna',
+        },
+        column: 'anna',
+        row: 'vue',
+        content: '+',
       },
     ],
   });
