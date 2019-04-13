@@ -16,11 +16,10 @@
   </div>
 </div>
 <script src="scheduler.js"></script>
-<<script>
+<script>
   window.scheduler({
     breakpoint: '767px',
     indexing: true,
-    container: 'scheduler-container',
     table: {
       columns: {
         data: ['Petr', 'Ivan'],
@@ -34,6 +33,10 @@
         column: 'Anna',
         row: 'Vue',
         content: '<h3>😃</h3>',
+        parents: [
+          { selector: 'tr', attributes: { class: 'ok' } },
+          { selector: 'table', attributes: { class: 'ok' } },
+        ],
       },
       {
         column: 'Ivan',
