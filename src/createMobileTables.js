@@ -7,15 +7,15 @@ export default function createMobileTables(opts) {
   // проходим по массиву колонок
   for (let i = 0; i < opts.table.columns.data.length; i += 1) {
     // создаем элемент table
-    let table = document.createElement('table');
+    const table = document.createElement('table');
     // проверяем пользовательские аттрибуты
     if (opts.table.attributes) {
       if (opts.table.attributes.id) {
         const opt = Object.assign({}, opts.table.attributes);
         opt.id = null;
-        table = addAttributes(table, opt);
+        addAttributes(table, opt);
       } else {
-        table = addAttributes(table, opts.table.attributes);
+        addAttributes(table, opts.table.attributes);
       }
     }
     // проверяем indexing
@@ -23,75 +23,66 @@ export default function createMobileTables(opts) {
       // задаем индекс
       table.setAttribute('data-index', String(i));
     }
+
     // THEAD
     // создаем элемент thead
-    let thead = document.createElement('thead');
+    const thead = table.createTHead();
     // проверяем пользовательские аттрибуты
     if (opts.table.thead.attributes) {
-      thead = addAttributes(thead, opts.table.thead.attributes);
+      addAttributes(thead, opts.table.thead.attributes);
     }
     // создаем элемент tr
-    let tr = document.createElement('tr');
+    let tr = thead.insertRow(-1);
     // проверяем пользовательские аттрибуты
     if (opts.table.thead.tr.attributes) {
-      tr = addAttributes(tr, opts.table.thead.tr.attributes);
+      addAttributes(tr, opts.table.thead.tr.attributes);
     }
-    let th;
-    // проверяем массив строк и removeMobile для th
-    if (opts.table.rows.data.length > 0 && !opts.table.tbody.th.removeMobile) {
-      // создаем элемент th
-      th = document.createElement('th');
+    // проверяем массив строк и removeMobile для td
+    if (opts.table.rows.data.length > 0 && !opts.table.tbody.td.removeMobile) {
+      // создаем элемент td
+      const td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
-      if (opts.table.thead.th.attributes) {
-        th = addAttributes(th, opts.table.thead.th.attributes);
+      if (opts.table.thead.td.attributes) {
+        addAttributes(td, opts.table.thead.td.attributes);
       }
-      // добавляем элемент th в tr
-      tr.appendChild(th);
     }
-    // создаем элемент th
-    th = document.createElement('th');
+    // создаем элемент td
+    let td = tr.insertCell(-1);
     // проверяем пользовательские аттрибуты
-    if (opts.table.thead.th.attributes) {
-      th = addAttributes(th, opts.table.thead.th.attributes);
+    if (opts.table.thead.td.attributes) {
+      addAttributes(td, opts.table.thead.td.attributes);
     }
     // присваиваем значение из массива колонок элементу th
-    th.textContent = opts.table.columns.data[i];
-    // добавляем элемент th в tr
-    tr.appendChild(th);
-    // добавляем элемент tr в thead
-    thead.appendChild(tr);
-    // добавляем элемент thead в table
-    table.appendChild(thead);
+    td.textContent = opts.table.columns.data[i];
+
     // TBODY
     // создаем элемент tbody
-    let tbody = document.createElement('tbody');
+    const tbody = table.createTBody();
     // проверяем пользовательские аттрибуты
     if (opts.table.tbody.attributes) {
-      tbody = addAttributes(tbody, opts.table.tbody.attributes);
+      addAttributes(tbody, opts.table.tbody.attributes);
     }
     // проходим по массиву строк
     for (let k = 0; k < opts.table.rows.data.length; k += 1) {
       // создаем элемент tr
-      tr = document.createElement('tr');
+      tr = tbody.insertRow(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.tbody.tr.attributes) {
-        tr = addAttributes(tr, opts.table.tbody.tr.attributes);
+        addAttributes(tr, opts.table.tbody.tr.attributes);
       }
-      // проверяем removeMobile для th
-      if (!opts.table.tbody.th.removeMobile) {
-        // создаем элемент th
-        th = document.createElement('th');
+      // проверяем removeMobile для td
+      if (!opts.table.tbody.td.removeMobile) {
+        // создаем элемент td
+        td = tr.insertCell(-1);
         // проверяем пользовательские аттрибуты
-        if (opts.table.tbody.th.attributes) {
-          th = addAttributes(th, opts.table.tbody.th.attributes);
+        if (opts.table.tbody.td.attributes) {
+          addAttributes(td, opts.table.tbody.td.attributes);
         }
-        // присваиваем значение из массива строк элементу th
-        th.innerHTML = opts.table.rows.data[k];
-        // добавляем элемент th в tr
-        tr.appendChild(th);
+        // присваиваем значение из массива строк элементу td
+        td.innerHTML = opts.table.rows.data[k];
       }
       // создаем элемент td
-      let td = document.createElement('td');
+      td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.tbody.td.attributes) {
         td = addAttributes(td, opts.table.tbody.td.attributes);
@@ -101,18 +92,12 @@ export default function createMobileTables(opts) {
         // присваиваем значение заполнителя из опций элементу td
         td.innerHTML = opts.table.tbody.td.content;
       }
-      // добавляем элемент td в tr
-      tr.appendChild(td);
-      // добавляем элемент tr в tbody
-      tbody.appendChild(tr);
     }
-    // добавляем элемент tbody в table
-    table.appendChild(tbody);
-    // добавляем элемент table в DocumentFragment
+
     fragment.appendChild(table);
   }
 
-  // создаем virtTables
+  // создаем empty 2d массив
   const virtTables = new Array(opts.table.columns.data.length);
   for (let i = 0; i < virtTables.length; i += 1) {
     virtTables[i] = new Array(opts.table.rows.data.length);
@@ -135,13 +120,13 @@ export default function createMobileTables(opts) {
       // заполняем virtTables
       virtTables[columnIndex][rowIndex] = true;
       // находим td в tr
-      let td = tr.querySelector('td');
+      const td = tr.querySelectorAll('td');
       // проверяем пользовательские аттрибуты у события
       if (opts.events[i].attributes) {
-        td = addAttributes(td, opts.events[i].attributes);
+        addAttributes(td[1], opts.events[i].attributes);
       }
       // присваиваем значение события td
-      td.innerHTML = opts.events[i].content;
+      td[1].innerHTML = opts.events[i].content;
     }
   }
 
@@ -186,7 +171,7 @@ export default function createMobileTables(opts) {
           // удаляем строку из таблицы
           trs[j].remove();
           // удаляем из virtTables
-          // virtTables[i].splice(j, 1);
+          virtTables[i].splice(j, 1);
         }
       }
     }
