@@ -1,7 +1,7 @@
 {
   "name": "sheduler",
   "version": "0.0.0",
-  "description": "Расписание событий из json в html",
+  "description": "Create html table",
   "private": true,
   "scripts": {
     "serve": "serve dev",
@@ -19,7 +19,7 @@
   },
   "keywords": [],
   "author": "unicorn-84 <unicorn-84@ya.ru> (https://github.com/unicorn-84)",
-  "license": "GNU AGPLv3",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/unicorn-84/sheduler/issues"
   },
