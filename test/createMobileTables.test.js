@@ -34,8 +34,8 @@ suite('#createMobileTable()', () => {
         assert.equal(tables[i].getAttribute('data-index'), i);
       }
     });
-    test('должна не отображать table', () => {
-      opts.table.removeEmptyMobile = true;
+    test('должна не отображать table, если нет событий', () => {
+      opts.table.disableEmptyMobile = true;
       const fragment = createMobileTables(opts);
       const tables = fragment.querySelectorAll('table');
       assert.equal(tables.length, 1);

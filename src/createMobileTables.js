@@ -130,27 +130,18 @@ export default function createMobileTables(opts) {
     }
   }
 
-  // проверяем removeEmptyMobile для table
-  if (opts.table.removeEmptyMobile) {
+  // проверяем table.disableEmptyMobile
+  if (opts.table.disableEmptyMobile === true) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
     // проходим по virtTables
     const clone = virtTables.slice(0);
-    label: // eslint-disable-line
     for (let i = 0; i < clone.length; i += 1) {
-      // проходим по вложенным массивам
-      for (let j = 0; j < clone[i].length; j += 1) {
-        // если true, значит таблица не пустая
-        if (clone[i][j] === true) {
-          // выходим по метке :-\
-          continue label; // eslint-disable-line
-        }
+      if (!clone[i].includes(true)) {
+        // все строки пусты удаляем таблицу
+        tables[i].remove();
+        virtTables.splice(i, 1);
       }
-      // все строки пусты
-      // удаляем таблицу
-      tables[i].remove();
-      // удаляем из virtTables
-      virtTables.splice(i, 1);
     }
   }
 
