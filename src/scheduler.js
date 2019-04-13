@@ -37,7 +37,10 @@ export default function scheduler(options) {
       container.appendChild(createMobileTables(opts));
     } else {
       // добавляем table в container
-      container.appendChild(createTable(opts));
+      const table = createTable(opts);
+      if (table) {
+        container.appendChild(table);
+      }
     }
   }
   // проверяем breakpoint

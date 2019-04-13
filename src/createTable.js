@@ -117,6 +117,14 @@ export default function createTable(opts) {
     }
   }
 
+  // проверяем table.disableEmpty
+  if (opts.table.disableEmpty === true) {
+    if (!virtTable.includes(true)) {
+      // все строки пусты не создаем таблицу
+      return null;
+    }
+  }
+
   // проверяем removeEmpty
   if (opts.table.tbody.tr.removeEmpty) {
     const tbody = table.querySelector('tbody');

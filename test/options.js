@@ -1,4 +1,7 @@
 export default {
+  breakpoint: undefined,
+  container: 'scheduler-container',
+  indexing: false,
   table: {
     attributes: {
       id: 'id',
@@ -42,6 +45,8 @@ export default {
       data: ['vue', 'polymer', 'react'],
       sort: false,
     },
+    disableEmpty: false,
+    disableEmptyMobile: false,
   },
   events: [
     {

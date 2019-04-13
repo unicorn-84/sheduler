@@ -16,6 +16,12 @@ suite('#createTable()', () => {
       table.innerHTML = '';
       assert.equal(table.outerHTML, '<table id="id" class="table table-bordered table-dark"></table>');
     });
+    test('должна не отображать table, если нет событий', () => {
+      opts.table.disableEmpty = true;
+      opts.events = [];
+      const table = createTable(opts);
+      assert.notExists(table);
+    });
   });
   suite('thead', () => {
     test('у table должен быть thead', () => {
@@ -29,22 +35,22 @@ suite('#createTable()', () => {
       tr.innerHTML = '';
       assert.equal(tr.outerHTML, '<tr class="tr"></tr>');
     });
-    test('у tr должны быть th', () => {
+    test('у tr должны быть td', () => {
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const ths = tr.querySelectorAll('th');
-      for (let i = 0; i < ths.length; i += 1) {
-        ths[i].innerHTML = '';
-        assert.equal(ths[i].outerHTML, '<th class="th"></th>');
+      const tds = tr.querySelectorAll('td');
+      for (let i = 0; i < tds.length; i += 1) {
+        tds[i].innerHTML = '';
+        assert.equal(tds[i].outerHTML, '<td class="td"></td>');
       }
     });
-    test('у th должен быть контент из columns', () => {
+    test('у td должен быть контент из columns', () => {
       opts.table.rows.data = [];
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
-      const ths = tr.querySelectorAll('th');
-      for (let i = 0; i < ths.length; i += 1) {
-        assert.equal(ths[i].outerHTML, `<th class="th">${opts.table.columns.data[i]}</th>`);
+      const tds = tr.querySelectorAll('td');
+      for (let i = 0; i < tds.length; i += 1) {
+        assert.equal(tds[i].outerHTML, `<td class="td">${opts.table.columns.data[i]}</td>`);
       }
     });
     test('у tr должен быть первый пустой td, если есть rows', () => {
