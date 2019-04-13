@@ -20,8 +20,8 @@
   window.scheduler({
     breakpoint: '991px',
     table: {
-      disableEmpty: true,
-      disableEmptyMobile: true,
+      disableEmpty: false,
+      disableEmptyMobile: false,
       attributes: {
         id: 'id',
         class: 'table table-bordered table-dark',
@@ -40,6 +40,8 @@
             class: 'td',
           },
         },
+        disable: false,
+        disableMobile: false,
       },
       tbody: {
         attributes: {

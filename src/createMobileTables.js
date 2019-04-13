@@ -25,35 +25,38 @@ export default function createMobileTables(opts) {
     }
 
     // THEAD
-    // создаем элемент thead
-    const thead = table.createTHead();
-    // проверяем пользовательские аттрибуты
-    if (opts.table.thead.attributes) {
-      addAttributes(thead, opts.table.thead.attributes);
-    }
-    // создаем элемент tr
-    let tr = thead.insertRow(-1);
-    // проверяем пользовательские аттрибуты
-    if (opts.table.thead.tr.attributes) {
-      addAttributes(tr, opts.table.thead.tr.attributes);
-    }
-    // проверяем массив строк и removeMobile для td
-    if (opts.table.rows.data.length > 0 && !opts.table.tbody.td.removeMobile) {
+    // проверяем thead.disableMobile
+    if (opts.table.thead.disableMobile !== true) {
+      // создаем элемент thead
+      const thead = table.createTHead();
+      // проверяем пользовательские аттрибуты
+      if (opts.table.thead.attributes) {
+        addAttributes(thead, opts.table.thead.attributes);
+      }
+      // создаем элемент tr
+      const tr = thead.insertRow(-1);
+      // проверяем пользовательские аттрибуты
+      if (opts.table.thead.tr.attributes) {
+        addAttributes(tr, opts.table.thead.tr.attributes);
+      }
+      // проверяем массив строк и removeMobile для td
+      if (opts.table.rows.data.length > 0 && !opts.table.tbody.td.removeMobile) {
+        // создаем элемент td
+        const td = tr.insertCell(-1);
+        // проверяем пользовательские аттрибуты
+        if (opts.table.thead.td.attributes) {
+          addAttributes(td, opts.table.thead.td.attributes);
+        }
+      }
       // создаем элемент td
       const td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.thead.td.attributes) {
         addAttributes(td, opts.table.thead.td.attributes);
       }
+      // присваиваем значение из массива колонок элементу th
+      td.textContent = opts.table.columns.data[i];
     }
-    // создаем элемент td
-    let td = tr.insertCell(-1);
-    // проверяем пользовательские аттрибуты
-    if (opts.table.thead.td.attributes) {
-      addAttributes(td, opts.table.thead.td.attributes);
-    }
-    // присваиваем значение из массива колонок элементу th
-    td.textContent = opts.table.columns.data[i];
 
     // TBODY
     // создаем элемент tbody
@@ -65,7 +68,7 @@ export default function createMobileTables(opts) {
     // проходим по массиву строк
     for (let k = 0; k < opts.table.rows.data.length; k += 1) {
       // создаем элемент tr
-      tr = tbody.insertRow(-1);
+      const tr = tbody.insertRow(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.tbody.tr.attributes) {
         addAttributes(tr, opts.table.tbody.tr.attributes);
@@ -73,7 +76,7 @@ export default function createMobileTables(opts) {
       // проверяем removeMobile для td
       if (!opts.table.tbody.td.removeMobile) {
         // создаем элемент td
-        td = tr.insertCell(-1);
+        const td = tr.insertCell(-1);
         // проверяем пользовательские аттрибуты
         if (opts.table.tbody.td.attributes) {
           addAttributes(td, opts.table.tbody.td.attributes);
@@ -82,10 +85,10 @@ export default function createMobileTables(opts) {
         td.innerHTML = opts.table.rows.data[k];
       }
       // создаем элемент td
-      td = tr.insertCell(-1);
+      const td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.tbody.td.attributes) {
-        td = addAttributes(td, opts.table.tbody.td.attributes);
+        addAttributes(td, opts.table.tbody.td.attributes);
       }
       // проверяем content
       if (opts.table.tbody.td.content) {

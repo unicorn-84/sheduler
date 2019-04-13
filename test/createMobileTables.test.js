@@ -95,6 +95,15 @@ suite('#createMobileTable()', () => {
         assert.equal(tds[0].outerHTML, '<td class="td"></td>');
       }
     });
+    test('должна не создавать thead', () => {
+      opts.table.thead.disableMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        const thead = tables[i].querySelector('thead');
+        assert.notExists(thead);
+      }
+    });
     // test('должна не отображать первый td', () => {
     //   opts.table.tbody.td.removeMobile = true;
     //   const fragment = createMobileTables(opts);

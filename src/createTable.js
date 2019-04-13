@@ -9,8 +9,8 @@ export default function createTable(opts) {
   }
 
   // THEAD
-  // проверяем массив колонок
-  if (opts.table.columns.data.length > 0) {
+  // проверяем массив колонок и thead.disable
+  if (opts.table.thead.disable !== true && opts.table.columns.data.length > 0) {
     // создаем элемент thead
     const thead = table.createTHead();
     // проверяем пользовательские аттрибуты

@@ -8,6 +8,8 @@ export default {
       class: 'table table-bordered table-dark',
     },
     thead: {
+      disable: false,
+      disableMobile: false,
       attributes: {
         class: 'thead',
       },

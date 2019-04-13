@@ -59,6 +59,11 @@ suite('#createTable()', () => {
       const tds = tr.querySelectorAll('td');
       assert.equal(tds[0].outerHTML, '<td class="td"></td>');
     });
+    test('должна не создавать thead', () => {
+      opts.table.thead.disable = true;
+      const thead = createTable(opts).querySelector('thead');
+      assert.notExists(thead);
+    });
     // test('должна не отображать первый td', () => {
     //   opts.table.tbody.td.remove = true;
     //   const thead = createTable(opts).querySelector('thead');
