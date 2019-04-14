@@ -52,8 +52,8 @@ export default {
   disableEmptyMobileRow: false,
   disableThead: false,
   disableMobileThead: false,
-  disableColumn: null,
-  disableMobileColumn: null,
+  disableFirstColumn: null,
+  disableFirstMobileColumn: null,
   events: [
     {
       attributes: {

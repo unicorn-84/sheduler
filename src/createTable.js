@@ -91,7 +91,7 @@ export default function createTable(opts) {
   }
 
   // создаем empty массив
-  const virtTable = new Array(opts.table.rows.data.length);
+  const virtRows = new Array(opts.table.rows.data.length);
 
   // EVENTS
   // проходим по массиву событий
@@ -106,7 +106,7 @@ export default function createTable(opts) {
         const tr = tbody.querySelectorAll('tr')[rowIndex];
         if (tr) {
           // изменяем virtTables
-          virtTable[rowIndex] = true;
+          virtRows[rowIndex] = true;
           // находим ячейку
           const td = tr.querySelectorAll('td')[columnIndex + 1];
           if (td) {
@@ -124,7 +124,7 @@ export default function createTable(opts) {
 
   // проверяем disableEmptyTable
   if (opts.disableEmptyTable === true) {
-    if (!virtTable.includes(true)) {
+    if (!virtRows.includes(true)) {
       // все строки пусты не создаем таблицу
       return null;
     }
@@ -136,14 +136,40 @@ export default function createTable(opts) {
     if (tbody) {
       const trs = tbody.querySelectorAll('tr');
       if (trs.length > 0) {
-        // проходим по virtTable
-        for (let i = 0; i < virtTable.length; i += 1) {
+        // клонируем virtRows
+        const clone = virtRows.slice(0);
+        for (let i = 0; i < clone.length; i += 1) {
           // если не true, значит пустая строка
-          if (virtTable[i] !== true) {
+          if (clone[i] !== true) {
             // находим и удаляем строку
             if (trs[i]) {
               trs[i].remove();
             }
+            // удаляем из virtRows
+            virtRows.splice(i, 1);
+          }
+        }
+      }
+    }
+  }
+
+  // проверяем disableFirstColumn
+  if (opts.disableFirstColumn) {
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    if (thead) {
+      const tds = thead.querySelectorAll('td');
+      if (tds.length > 0) {
+        tds[0].remove();
+      }
+    }
+    if (tbody) {
+      const trs = tbody.querySelectorAll('tr');
+      if (trs.length > 0) {
+        for (let i = 0; i < trs.length; i += 1) {
+          const firstTd = trs[i].children[0];
+          if (firstTd) {
+            firstTd.remove();
           }
         }
       }
