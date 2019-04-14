@@ -17,7 +17,7 @@ suite('#createTable()', () => {
       assert.equal(table.outerHTML, '<table id="id" class="table table-bordered table-dark"></table>');
     });
     test('должна не отображать table, если нет событий', () => {
-      opts.table.disableEmpty = true;
+      opts.disableEmptyTable = true;
       opts.events = [];
       const table = createTable(opts);
       assert.notExists(table);
@@ -60,7 +60,7 @@ suite('#createTable()', () => {
       assert.equal(tds[0].outerHTML, '<td class="td"></td>');
     });
     test('должна не создавать thead', () => {
-      opts.table.disableThead = true;
+      opts.disableThead = true;
       const thead = createTable(opts).querySelector('thead');
       assert.notExists(thead);
     });
@@ -125,7 +125,7 @@ suite('#createTable()', () => {
     //   }
     // });
     test('должна не отображать пустые строки', () => {
-      opts.table.tbody.disableEmptyRows = true;
+      opts.disableEmptyRow = true;
       const tbody = createTable(opts).querySelector('tbody');
       assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">vue</td><td class="td">-</td><td class="td">-</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
     });

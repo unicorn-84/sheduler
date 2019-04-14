@@ -20,8 +20,6 @@
   window.scheduler({
     breakpoint: '991px',
     table: {
-      disableEmpty: false,
-      disableEmptyMobile: false,
       attributes: {
         id: 'id',
         class: 'table table-bordered table-dark',
@@ -58,8 +56,6 @@
           },
           content: '-',
         },
-        disableEmptyRows: true,
-        disableEmptyRowsMobile: true,
       },
       columns: {
         data: ['vlad', 'ivan', 'anna'],
@@ -69,6 +65,12 @@
         sort: false,
       },
     },
+    disableEmptyTable: false,
+    disableEmptyMobileTable: false,
+    disableEmptyRow: false,
+    disableEmptyMobileRow: false,
+    disableThead: false,
+    disableMobileThead: false,
     events: [
       {
         attributes: {

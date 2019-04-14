@@ -25,8 +25,8 @@ export default function createMobileTables(opts) {
     }
 
     // THEAD
-    // проверяем thead.disableMobile
-    if (opts.table.thead.disableMobile !== true) {
+    // проверяем disableMobileThead
+    if (opts.disableMobileThead !== true) {
       // создаем элемент thead
       const thead = table.createTHead();
       // проверяем пользовательские аттрибуты
@@ -140,8 +140,8 @@ export default function createMobileTables(opts) {
     }
   }
 
-  // проверяем table.disableEmptyMobile
-  if (opts.table.disableEmptyMobile === true) {
+  // проверяем disableEmptyMobileTable
+  if (opts.disableEmptyMobileTable === true) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
     if (tables.length > 0) {
@@ -160,8 +160,8 @@ export default function createMobileTables(opts) {
     }
   }
 
-  // проверяем tbody.disableEmptyRowsMobile
-  if (opts.table.tbody.disableEmptyRowsMobile === true) {
+  // проверяем disableEmptyMobileRow
+  if (opts.disableEmptyMobileRow === true) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
     // проверяем таблицы

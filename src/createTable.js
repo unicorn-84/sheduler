@@ -9,8 +9,8 @@ export default function createTable(opts) {
   }
 
   // THEAD
-  // проверяем массив колонок и table.disableThead
-  if (opts.table.disableThead !== true && opts.table.columns.data.length > 0) {
+  // проверяем массив колонок и disableThead
+  if (opts.disableThead !== true && opts.table.columns.data.length > 0) {
     // создаем элемент thead
     const thead = table.createTHead();
     // проверяем пользовательские аттрибуты
@@ -122,16 +122,16 @@ export default function createTable(opts) {
     }
   }
 
-  // проверяем table.disableEmpty
-  if (opts.table.disableEmpty === true) {
+  // проверяем disableEmptyTable
+  if (opts.disableEmptyTable === true) {
     if (!virtTable.includes(true)) {
       // все строки пусты не создаем таблицу
       return null;
     }
   }
 
-  // проверяем tbody.disableEmptyRow
-  if (opts.table.tbody.disableEmptyRows) {
+  // проверяем disableEmptyRow
+  if (opts.disableEmptyRow) {
     const tbody = table.querySelector('tbody');
     if (tbody) {
       const trs = tbody.querySelectorAll('tr');

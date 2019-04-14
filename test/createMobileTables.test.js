@@ -35,7 +35,7 @@ suite('#createMobileTable()', () => {
       }
     });
     test('должна не отображать table, если нет событий', () => {
-      opts.table.disableEmptyMobile = true;
+      opts.disableEmptyMobileTable = true;
       const fragment = createMobileTables(opts);
       const tables = fragment.querySelectorAll('table');
       assert.equal(tables.length, 1);
@@ -96,7 +96,7 @@ suite('#createMobileTable()', () => {
       }
     });
     test('должна не создавать thead', () => {
-      opts.table.thead.disableMobile = true;
+      opts.disableMobileThead = true;
       const fragment = createMobileTables(opts);
       const tables = fragment.querySelectorAll('table');
       for (let i = 0; i < tables.length; i += 1) {
@@ -187,7 +187,7 @@ suite('#createMobileTable()', () => {
     //   }
     // });
     test('должна не отображать пустые строки', () => {
-      opts.table.tbody.disableEmptyRowsMobile = true;
+      opts.disableEmptyMobileRow = true;
       const fragment = createMobileTables(opts);
       const tables = fragment.querySelectorAll('table');
       let tbody = tables[0].querySelector('tbody');

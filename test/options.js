@@ -2,7 +2,6 @@ export default {
   breakpoint: undefined,
   container: 'scheduler-container',
   indexing: false,
-
   table: {
     attributes: {
       id: 'id',
@@ -38,8 +37,6 @@ export default {
         },
         content: '-',
       },
-      disableEmptyRows: false,
-      disableEmptyRowsMobile: false,
     },
     columns: {
       data: ['vlad', 'ivan', 'anna'],
@@ -48,11 +45,13 @@ export default {
       data: ['vue', 'polymer', 'react'],
       sort: false,
     },
-    disableEmpty: false,
-    disableEmptyMobile: false,
-    disableThead: false,
-    disableMobileThead: false,
   },
+  disableEmptyTable: false,
+  disableEmptyMobileTable: false,
+  disableEmptyRow: false,
+  disableEmptyMobileRow: false,
+  disableThead: false,
+  disableMobileThead: false,
   events: [
     {
       attributes: {
