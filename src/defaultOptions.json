@@ -1,5 +1,13 @@
 {
-  "container": "scheduler-container",
+  "breakpoint": null,
+  "container": null,
+  "indexing": false,
+  "disableEmptyTable": false,
+  "disableEmptyMobileTable": false,
+  "disableEmptyRow": false,
+  "disableEmptyMobileRow": false,
+  "disableThead": false,
+  "disableMobileThead": false,
   "table": {
     "attributes": {},
     "thead": {
@@ -17,14 +25,17 @@
         "attributes": {}
       },
       "td": {
-        "attributes": {}
+        "attributes": {},
+        "content": null
       }
     },
     "columns": {
-      "data": []
+      "data": [],
+      "sort": false
     },
     "rows": {
-      "data": []
+      "data": [],
+      "sort": false
     }
   },
   "events": []

@@ -1,5 +1,5 @@
 export default {
-  breakpoint: undefined,
+  breakpoint: null,
   container: 'scheduler-container',
   indexing: false,
   table: {
@@ -52,6 +52,8 @@ export default {
   disableEmptyMobileRow: false,
   disableThead: false,
   disableMobileThead: false,
+  disableColumn: null,
+  disableMobileColumn: null,
   events: [
     {
       attributes: {

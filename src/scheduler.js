@@ -24,7 +24,7 @@ export default function scheduler(options) {
   opts.table.rows.data = rows;
   // проверяем breakpoint
   let mql = {};
-  if (opts.breakpoint) {
+  if (opts.breakpoint && typeof opts.breakpoint === 'string') {
     // создаем объект MediaQueryList
     mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
   }
