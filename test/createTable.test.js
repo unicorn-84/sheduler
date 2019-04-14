@@ -7,7 +7,7 @@ import options from './options';
 suite('#createTable()', () => {
   let opts;
   setup(() => {
-    opts = _.defaultsDeep({}, options);
+    opts = _.cloneDeep(options);
     createWindow();
   });
   suite('table', () => {
@@ -125,7 +125,7 @@ suite('#createTable()', () => {
     //   }
     // });
     test('должна не отображать пустые строки', () => {
-      opts.table.tbody.tr.removeEmpty = true;
+      opts.table.tbody.disableEmptyRows = true;
       const tbody = createTable(opts).querySelector('tbody');
       assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">vue</td><td class="td">-</td><td class="td">-</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
     });

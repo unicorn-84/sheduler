@@ -7,7 +7,7 @@ suite('#scheduler()', () => {
   let opts;
   let container;
   setup(() => {
-    opts = _.defaultsDeep({}, options);
+    opts = _.cloneDeep(options);
     createWindow();
     container = document.getElementById('scheduler-container');
   });

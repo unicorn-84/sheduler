@@ -107,7 +107,6 @@ export default function createMobileTables(opts) {
   }
 
   // EVENTS
-  // todo: Добавить проверку на совпадение
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
     // проверяем наличие значений объекта события в массивах колонок и строк
@@ -116,20 +115,28 @@ export default function createMobileTables(opts) {
     if (rowIndex !== -1 && columnIndex !== -1) {
       // находим таблицу с совпавшим значением колонки
       const table = fragment.querySelectorAll('table')[columnIndex];
-      // находим в таблице tbody
-      const tbody = table.querySelector('tbody');
-      // находим в tbody tr с совпавшим значением строки
-      const tr = tbody.querySelectorAll('tr')[rowIndex];
-      // заполняем virtTables
-      virtTables[columnIndex][rowIndex] = true;
-      // находим td в tr
-      const td = tr.querySelectorAll('td');
-      // проверяем пользовательские аттрибуты у события
-      if (opts.events[i].attributes) {
-        addAttributes(td[1], opts.events[i].attributes);
+      if (table) {
+        // находим в таблице tbody
+        const tbody = table.querySelector('tbody');
+        if (tbody) {
+          // находим в tbody tr с совпавшим значением строки
+          const tr = tbody.querySelectorAll('tr')[rowIndex];
+          // заполняем virtTables
+          if (tr) {
+            virtTables[columnIndex][rowIndex] = true;
+            // находим td в tr
+            const td = tr.querySelectorAll('td');
+            if (td) {
+              // проверяем пользовательские аттрибуты у события
+              if (opts.events[i].attributes) {
+                addAttributes(td[1], opts.events[i].attributes);
+              }
+              // присваиваем значение события td
+              td[1].innerHTML = opts.events[i].content;
+            }
+          }
+        }
       }
-      // присваиваем значение события td
-      td[1].innerHTML = opts.events[i].content;
     }
   }
 
@@ -137,35 +144,51 @@ export default function createMobileTables(opts) {
   if (opts.table.disableEmptyMobile === true) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
-    // проходим по virtTables
-    const clone = virtTables.slice(0);
-    for (let i = 0; i < clone.length; i += 1) {
-      if (!clone[i].includes(true)) {
-        // все строки пусты удаляем таблицу
-        tables[i].remove();
-        virtTables.splice(i, 1);
+    if (tables.length > 0) {
+      // клонируем virtTables
+      const clone = virtTables.slice(0);
+      // проходим по масиву
+      for (let i = 0; i < clone.length; i += 1) {
+        if (!clone[i].includes(true)) {
+          // все строки пусты удаляем таблицу
+          if (tables[i]) {
+            tables[i].remove();
+          }
+          virtTables.splice(i, 1);
+        }
       }
     }
   }
 
-  // проверяем removeEmptyMobile для tr в tbody
-  if (opts.table.tbody.tr.removeEmptyMobile) {
+  // проверяем tbody.disableEmptyRowsMobile
+  if (opts.table.tbody.disableEmptyRowsMobile === true) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
-    // проходим по virtTables
-    const clone = virtTables.slice(0);
-    for (let i = 0; i < clone.length; i += 1) {
-      // находим строки
-      const tbody = tables[i].querySelector('tbody');
-      const trs = tbody.querySelectorAll('tr');
-      // проходим по вложенным массивам
-      for (let j = 0; j < clone[i].length; j += 1) {
-        // если empty, значит пустая строка
-        if (!clone[i][j]) {
-          // удаляем строку из таблицы
-          trs[j].remove();
-          // удаляем из virtTables
-          virtTables[i].splice(j, 1);
+    // проверяем таблицы
+    if (tables.length > 0) {
+      // клонируем virtTables
+      const clone = virtTables.slice(0);
+      // проходим по массиву
+      for (let i = 0; i < clone.length; i += 1) {
+        const tbody = tables[i].querySelector('tbody');
+        if (tbody) {
+          const trs = tbody.querySelectorAll('tr');
+          if (trs.length > 0) {
+            // клонируем вложенные массивы
+            clone[i] = virtTables[i].slice(0);
+            // проходим по вложенным массивам
+            for (let j = 0; j < clone[i].length; j += 1) {
+              // если не true, значит пустая строка
+              if (clone[i][j] !== true) {
+                // удаляем строку из таблицы
+                if (trs[j]) {
+                  trs[j].remove();
+                }
+                // удаляем из virtTables
+                virtTables[i].splice(j, 1);
+              }
+            }
+          }
         }
       }
     }

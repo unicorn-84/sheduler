@@ -39,6 +39,8 @@ export default {
         },
         content: '-',
       },
+      disableEmptyRows: false,
+      disableEmptyRowsMobile: false,
     },
     columns: {
       data: ['vlad', 'ivan', 'anna'],

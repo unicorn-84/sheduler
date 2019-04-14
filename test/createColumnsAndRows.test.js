@@ -6,7 +6,7 @@ import options from './options';
 suite('#createColumnsAndRows()', () => {
   let opts;
   setup(() => {
-    opts = _.defaultsDeep({}, options);
+    opts = _.cloneDeep(options);
   });
   test('должна вернуть массив значений колонок', () => {
     const { columns } = createColumnsAndRows(opts);

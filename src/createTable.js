@@ -94,26 +94,31 @@ export default function createTable(opts) {
   const virtTable = new Array(opts.table.rows.data.length);
 
   // EVENTS
-  // todo: Добавить проверку на совпадение
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
     // проверяем наличие значений объекта события в массивах колонок и строк
     const rowIndex = opts.table.rows.data.indexOf(opts.events[i].row);
     const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
-      // находим строку
       const tbody = table.querySelector('tbody');
-      const tr = tbody.querySelectorAll('tr')[rowIndex];
-      // изменяем virtTables
-      virtTable[rowIndex] = true;
-      // находим ячейку
-      const td = tr.querySelectorAll('td')[columnIndex + 1];
-      // проверяем пользовательские аттрибуты
-      if (opts.events[i].attributes) {
-        addAttributes(td, opts.events[i].attributes);
+      if (tbody) {
+        // находим строку
+        const tr = tbody.querySelectorAll('tr')[rowIndex];
+        if (tr) {
+          // изменяем virtTables
+          virtTable[rowIndex] = true;
+          // находим ячейку
+          const td = tr.querySelectorAll('td')[columnIndex + 1];
+          if (td) {
+            // проверяем пользовательские аттрибуты
+            if (opts.events[i].attributes) {
+              addAttributes(td, opts.events[i].attributes);
+            }
+            // присваиваем значение события td
+            td.innerHTML = opts.events[i].content;
+          }
+        }
       }
-      // присваиваем значение события td
-      td.innerHTML = opts.events[i].content;
     }
   }
 
@@ -125,16 +130,22 @@ export default function createTable(opts) {
     }
   }
 
-  // проверяем removeEmpty
-  if (opts.table.tbody.tr.removeEmpty) {
+  // проверяем tbody.disableEmptyRow
+  if (opts.table.tbody.disableEmptyRows) {
     const tbody = table.querySelector('tbody');
-    const trs = tbody.querySelectorAll('tr');
-    // проходим по virtTable
-    for (let i = 0; i < virtTable.length; i += 1) {
-      // если empty, значит пустая строка
-      if (!virtTable[i]) {
-        // находим и удаляем строку
-        trs[i].remove();
+    if (tbody) {
+      const trs = tbody.querySelectorAll('tr');
+      if (trs.length > 0) {
+        // проходим по virtTable
+        for (let i = 0; i < virtTable.length; i += 1) {
+          // если не true, значит пустая строка
+          if (virtTable[i] !== true) {
+            // находим и удаляем строку
+            if (trs[i]) {
+              trs[i].remove();
+            }
+          }
+        }
       }
     }
   }

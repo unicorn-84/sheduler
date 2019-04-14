@@ -7,7 +7,7 @@ import createMobileTables from '../src/createMobileTables';
 suite('#createMobileTable()', () => {
   let opts;
   setup(() => {
-    opts = _.defaultsDeep({}, options);
+    opts = _.cloneDeep(options);
     createWindow();
   });
   suite('tables', () => {
@@ -186,16 +186,16 @@ suite('#createMobileTable()', () => {
     //     assert.notExists(th);
     //   }
     // });
-    // test('должна не отображать tr', () => {
-    //   opts.table.tbody.tr.removeEmptyMobile = true;
-    //   const fragment = createMobileTables(opts);
-    //   const tables = fragment.querySelectorAll('table');
-    //   let tbody = tables[0].querySelector('tbody');
-    //   assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
-    //   tbody = tables[1].querySelector('tbody');
-    //   assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
-    //   tbody = tables[2].querySelector('tbody');
-    //   assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">vue</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
-    // });
+    test('должна не отображать пустые строки', () => {
+      opts.table.tbody.disableEmptyRowsMobile = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      let tbody = tables[0].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
+      tbody = tables[1].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"></tbody>');
+      tbody = tables[2].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">vue</td><td class="td bg-dark" data-column="anna">+</td></tr></tbody>');
+    });
   });
 });
