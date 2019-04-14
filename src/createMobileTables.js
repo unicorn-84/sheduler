@@ -1,3 +1,4 @@
+import compact from 'lodash/compact';
 import addAttributes from './addAttributes';
 
 export default function createMobileTables(opts) {
@@ -39,8 +40,8 @@ export default function createMobileTables(opts) {
       if (opts.table.thead.tr.attributes) {
         addAttributes(tr, opts.table.thead.tr.attributes);
       }
-      // проверяем массив строк и removeMobile для td
-      if (opts.table.rows.data.length > 0 && !opts.table.tbody.td.removeMobile) {
+      // проверяем массив строк
+      if (opts.table.rows.data.length > 0) {
         // создаем элемент td
         const td = tr.insertCell(-1);
         // проверяем пользовательские аттрибуты
@@ -73,19 +74,15 @@ export default function createMobileTables(opts) {
       if (opts.table.tbody.tr.attributes) {
         addAttributes(tr, opts.table.tbody.tr.attributes);
       }
-      // проверяем removeMobile для td
-      if (!opts.table.tbody.td.removeMobile) {
-        // создаем элемент td
-        const td = tr.insertCell(-1);
-        // проверяем пользовательские аттрибуты
-        if (opts.table.tbody.td.attributes) {
-          addAttributes(td, opts.table.tbody.td.attributes);
-        }
-        // присваиваем значение из массива строк элементу td
-        td.innerHTML = opts.table.rows.data[k];
+      let td = tr.insertCell(-1);
+      // проверяем пользовательские аттрибуты
+      if (opts.table.tbody.td.attributes) {
+        addAttributes(td, opts.table.tbody.td.attributes);
       }
+      // присваиваем значение из массива строк элементу td
+      td.innerHTML = opts.table.rows.data[k];
       // создаем элемент td
-      const td = tr.insertCell(-1);
+      td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
       if (opts.table.tbody.td.attributes) {
         addAttributes(td, opts.table.tbody.td.attributes);
@@ -101,10 +98,8 @@ export default function createMobileTables(opts) {
   }
 
   // создаем empty 2d массив
-  const virtTables = new Array(opts.table.columns.data.length);
-  for (let i = 0; i < virtTables.length; i += 1) {
-    virtTables[i] = new Array(opts.table.rows.data.length);
-  }
+  let virtTables = Array.from(new Array(opts.table.columns.data.length),
+    () => Array.from(new Array(opts.table.rows.data.length), () => null));
 
   // EVENTS
   // проходим по массиву событий
@@ -114,25 +109,25 @@ export default function createMobileTables(opts) {
     const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
       // находим таблицу с совпавшим значением колонки
-      const table = fragment.querySelectorAll('table')[columnIndex];
-      if (table) {
+      const tables = fragment.querySelectorAll('table');
+      if (tables.length > 0) {
         // находим в таблице tbody
-        const tbody = table.querySelector('tbody');
+        const tbody = tables[columnIndex].querySelector('tbody');
         if (tbody) {
           // находим в tbody tr с совпавшим значением строки
-          const tr = tbody.querySelectorAll('tr')[rowIndex];
-          // заполняем virtTables
-          if (tr) {
+          const trs = tbody.querySelectorAll('tr');
+          if (trs.length > 0) {
+            // заполняем virtTables
             virtTables[columnIndex][rowIndex] = true;
             // находим td в tr
-            const td = tr.querySelectorAll('td');
-            if (td) {
+            const tds = trs[rowIndex].querySelectorAll('td');
+            if (tds.length > 0) {
               // проверяем пользовательские аттрибуты у события
               if (opts.events[i].attributes) {
-                addAttributes(td[1], opts.events[i].attributes);
+                addAttributes(tds[1], opts.events[i].attributes);
               }
               // присваиваем значение события td
-              td[1].innerHTML = opts.events[i].content;
+              tds[1].innerHTML = opts.events[i].content;
             }
           }
         }
@@ -145,16 +140,14 @@ export default function createMobileTables(opts) {
     // находим таблицы
     const tables = fragment.querySelectorAll('table');
     if (tables.length > 0) {
-      // клонируем virtTables
-      const clone = virtTables.slice(0);
       // проходим по масиву
-      for (let i = 0; i < clone.length; i += 1) {
-        if (!clone[i].includes(true)) {
+      for (let i = 0; i < virtTables.length; i += 1) {
+        if (!virtTables[i].includes(true)) {
           // все строки пусты удаляем таблицу
           if (tables[i]) {
             tables[i].remove();
+            virtTables[i] = null;
           }
-          virtTables.splice(i, 1);
         }
       }
     }
@@ -166,26 +159,52 @@ export default function createMobileTables(opts) {
     const tables = fragment.querySelectorAll('table');
     // проверяем таблицы
     if (tables.length > 0) {
-      // клонируем virtTables
-      const clone = virtTables.slice(0);
       // проходим по массиву
-      for (let i = 0; i < clone.length; i += 1) {
+      virtTables = compact(virtTables);
+      for (let i = 0; i < virtTables.length; i += 1) {
         const tbody = tables[i].querySelector('tbody');
         if (tbody) {
           const trs = tbody.querySelectorAll('tr');
           if (trs.length > 0) {
-            // клонируем вложенные массивы
-            clone[i] = virtTables[i].slice(0);
             // проходим по вложенным массивам
-            for (let j = 0; j < clone[i].length; j += 1) {
+            for (let j = 0; j < virtTables[i].length; j += 1) {
               // если не true, значит пустая строка
-              if (clone[i][j] !== true) {
+              if (virtTables[i][j] !== true) {
                 // удаляем строку из таблицы
                 if (trs[j]) {
                   trs[j].remove();
+                  // удаляем из virtTables
+                  virtTables[i][j] = null;
                 }
-                // удаляем из virtTables
-                virtTables[i].splice(j, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // проверяем disableFirstMobileColumn
+  if (opts.disableFirstMobileColumn) {
+    // находим таблицы
+    const tables = fragment.querySelectorAll('table');
+    if (tables.length > 0) {
+      for (let i = 0; i < tables.length; i += 1) {
+        const thead = tables[i].querySelector('thead');
+        const tbody = tables[i].querySelector('tbody');
+        if (thead) {
+          const tds = thead.querySelectorAll('td');
+          if (tds.length > 0) {
+            tds[0].remove();
+          }
+        }
+        if (tbody) {
+          const trs = tbody.querySelectorAll('tr');
+          if (trs.length > 0) {
+            for (let j = 0; j < trs.length; j += 1) {
+              const firstTd = trs[j].children[0];
+              if (firstTd) {
+                firstTd.remove();
               }
             }
           }

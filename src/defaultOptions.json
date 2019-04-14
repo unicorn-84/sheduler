@@ -8,6 +8,8 @@
   "disableEmptyMobileRow": false,
   "disableThead": false,
   "disableMobileThead": false,
+  "disableFirstColumn": false,
+  "disableFirstMobileColumn": false,
   "table": {
     "attributes": {},
     "thead": {

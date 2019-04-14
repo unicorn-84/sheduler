@@ -104,16 +104,16 @@ suite('#createMobileTable()', () => {
         assert.notExists(thead);
       }
     });
-    // test('должна не отображать первый td', () => {
-    //   opts.table.tbody.td.removeMobile = true;
-    //   const fragment = createMobileTables(opts);
-    //   const tables = fragment.querySelectorAll('table');
-    //   for (let i = 0; i < tables.length; i += 1) {
-    //     const thead = tables[i].querySelector('thead');
-    //     const tr = thead.querySelector('tr');
-    //     assert.equal(tr.outerHTML, `<tr class="tr"><td class="td">${opts.table.columns.data[i]}</td></tr>`);
-    //   }
-    // });
+    test('должна не отображать первый td', () => {
+      opts.disableFirstMobileColumn = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      for (let i = 0; i < tables.length; i += 1) {
+        const thead = tables[i].querySelector('thead');
+        const tr = thead.querySelector('tr');
+        assert.equal(tr.outerHTML, `<tr class="tr"><td class="td">${opts.table.columns.data[i]}</td></tr>`);
+      }
+    });
   });
   suite('tbody', () => {
     test('у table должен быть tbody', () => {
@@ -175,17 +175,17 @@ suite('#createMobileTable()', () => {
         }
       }
     });
-    // test('должна не отображать th', () => {
-    //   opts.table.tbody.th.removeMobile = true;
-    //   const fragment = createMobileTables(opts);
-    //   const tables = fragment.querySelectorAll('table');
-    //   for (let i = 0; i < tables.length; i += 1) {
-    //     const tbody = tables[i].querySelector('tbody');
-    //     const tr = tbody.querySelector('tr');
-    //     const th = tr.querySelector('th');
-    //     assert.notExists(th);
-    //   }
-    // });
+    test('должна не отображать первый td', () => {
+      opts.disableFirstMobileColumn = true;
+      const fragment = createMobileTables(opts);
+      const tables = fragment.querySelectorAll('table');
+      let tbody = tables[0].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">-</td></tr><tr class="tr"><td class="td">-</td></tr><tr class="tr"><td class="td">-</td></tr></tbody>');
+      tbody = tables[1].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td">-</td></tr><tr class="tr"><td class="td">-</td></tr><tr class="tr"><td class="td">-</td></tr></tbody>');
+      tbody = tables[2].querySelector('tbody');
+      assert.equal(tbody.outerHTML, '<tbody class="tbody"><tr class="tr"><td class="td bg-dark" data-column="anna">+</td></tr><tr class="tr"><td class="td">-</td></tr><tr class="tr"><td class="td">-</td></tr></tbody>');
+    });
     test('должна не отображать пустые строки', () => {
       opts.disableEmptyMobileRow = true;
       const fragment = createMobileTables(opts);

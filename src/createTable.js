@@ -91,7 +91,7 @@ export default function createTable(opts) {
   }
 
   // создаем empty массив
-  const virtRows = new Array(opts.table.rows.data.length);
+  const virtRows = Array.from(new Array(opts.table.rows.data.length), () => null);
 
   // EVENTS
   // проходим по массиву событий
@@ -146,7 +146,7 @@ export default function createTable(opts) {
               trs[i].remove();
             }
             // удаляем из virtRows
-            virtRows.splice(i, 1);
+            virtRows[i] = null;
           }
         }
       }
