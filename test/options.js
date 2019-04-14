@@ -2,14 +2,13 @@ export default {
   breakpoint: undefined,
   container: 'scheduler-container',
   indexing: false,
+
   table: {
     attributes: {
       id: 'id',
       class: 'table table-bordered table-dark',
     },
     thead: {
-      disable: false,
-      disableMobile: false,
       attributes: {
         class: 'thead',
       },
@@ -51,6 +50,8 @@ export default {
     },
     disableEmpty: false,
     disableEmptyMobile: false,
+    disableThead: false,
+    disableMobileThead: false,
   },
   events: [
     {

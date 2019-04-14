@@ -60,7 +60,7 @@ suite('#createTable()', () => {
       assert.equal(tds[0].outerHTML, '<td class="td"></td>');
     });
     test('должна не создавать thead', () => {
-      opts.table.thead.disable = true;
+      opts.table.disableThead = true;
       const thead = createTable(opts).querySelector('thead');
       assert.notExists(thead);
     });
