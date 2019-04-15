@@ -6,6 +6,16 @@
   <title>Scheduler</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    table {
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+    table thead td:first-child {
+      width: 15%;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -16,29 +26,48 @@
   </div>
 </div>
 <script src="scheduler.js"></script>
-<<script>
+<script>
   window.scheduler({
-    breakpoint: '767px',
-    indexing: true,
+    breakpoint: '991px',
     container: 'scheduler-container',
     table: {
-      columns: {
-        data: ['Petr', 'Ivan'],
+      attributes: {
+        class: 'table table-bordered table-dark text-center align-middle',
       },
-      rows: {
-        data: ['Polymer'],
-      },
+    },
+    rows: {
+      sort: true,
     },
     events: [
       {
-        column: 'Anna',
-        row: 'Vue',
-        content: '<h3>😃</h3>',
+        column: 'Январь',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
       },
       {
-        column: 'Ivan',
-        row: 'React',
-        content: '<h3>😕</h3>',
+        column: 'Январь',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Февраль',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Февраль',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Март',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Март',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
       },
     ],
   });

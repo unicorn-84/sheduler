@@ -6,7 +6,7 @@ import options from './options';
 suite('#createColumnsAndRows()', () => {
   let opts;
   setup(() => {
-    opts = _.defaultsDeep({}, options);
+    opts = _.cloneDeep(options);
   });
   test('должна вернуть массив значений колонок', () => {
     const { columns } = createColumnsAndRows(opts);
@@ -17,14 +17,14 @@ suite('#createColumnsAndRows()', () => {
     assert.deepEqual(rows, ['vue', 'polymer', 'react']);
   });
   test('должна сортировать массив значений колонок', () => {
-    opts.table.columns.data.push('1', '09:30', '09:45');
-    opts.table.columns.sort = true;
+    opts.columns.data.push('1', '09:30', '09:45');
+    opts.columns.sort = true;
     const { columns } = createColumnsAndRows(opts);
     assert.deepEqual(columns, ['09:30', '09:45', '1', 'anna', 'ivan', 'vlad']);
   });
   test('должна сортировать массив значений строк', () => {
-    opts.table.rows.data.push('2', '15', 'Пн');
-    opts.table.rows.sort = true;
+    opts.rows.data.push('2', '15', 'Пн');
+    opts.rows.sort = true;
     const { rows } = createColumnsAndRows(opts);
     assert.deepEqual(rows, ['2', '15', 'polymer', 'react', 'vue', 'Пн']);
   });

@@ -20,11 +20,11 @@ export default function scheduler(options) {
     return;
   }
   // присваиваем массивы колонок и строк
-  opts.table.columns.data = columns;
-  opts.table.rows.data = rows;
+  opts.columns.data = columns;
+  opts.rows.data = rows;
   // проверяем breakpoint
   let mql = {};
-  if (opts.breakpoint) {
+  if (opts.breakpoint && typeof opts.breakpoint === 'string') {
     // создаем объект MediaQueryList
     mql = window.matchMedia(`(max-width: ${opts.breakpoint})`);
   }
@@ -37,7 +37,10 @@ export default function scheduler(options) {
       container.appendChild(createMobileTables(opts));
     } else {
       // добавляем table в container
-      container.appendChild(createTable(opts));
+      const table = createTable(opts);
+      if (table) {
+        container.appendChild(table);
+      }
     }
   }
   // проверяем breakpoint
