@@ -20,9 +20,6 @@
     "linebreak-style": [
       "error",
       "windows"
-    ],
-    "no-invalid-regexp": [
-      0
     ]
   }
 }
