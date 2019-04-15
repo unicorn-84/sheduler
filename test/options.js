@@ -49,6 +49,7 @@ export default {
   disableFirstMobileColumn: false,
   columns: {
     data: ['vlad', 'ivan', 'anna'],
+    sort: false,
   },
   rows: {
     data: ['vue', 'polymer', 'react'],
