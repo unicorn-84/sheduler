@@ -2,14 +2,6 @@
   "breakpoint": null,
   "container": null,
   "indexing": false,
-  "disableEmptyTable": false,
-  "disableEmptyMobileTable": false,
-  "disableEmptyRow": false,
-  "disableEmptyMobileRow": false,
-  "disableThead": false,
-  "disableMobileThead": false,
-  "disableFirstColumn": false,
-  "disableFirstMobileColumn": false,
   "table": {
     "attributes": {},
     "thead": {
@@ -32,6 +24,14 @@
       }
     }
   },
+  "disableEmptyTable": false,
+  "disableEmptyMobileTable": false,
+  "disableEmptyRow": false,
+  "disableEmptyMobileRow": false,
+  "disableThead": false,
+  "disableMobileThead": false,
+  "disableFirstColumn": false,
+  "disableFirstMobileColumn": false,
   "columns": {
     "data": [],
     "sort": false
