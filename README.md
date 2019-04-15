@@ -22,7 +22,7 @@
       },
       {
         column: 'Ivan',
-        row: 'Polymer',
+        row: 'React',
         content: '<span>😕</span>',
       },
     ],
@@ -34,21 +34,21 @@
 <table>
   <thead>
     <tr>
-      <td></th>
-      <td>Petr</th>
-      <td>Ivan</th>
-      <td>Anna</th>
+      <td></td>
+      <td>Petr</td>
+      <td>Ivan</td>
+      <td>Anna</td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Polymer</th>
+      <td>Polymer</td>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td>React</th>
+      <td>React</td>
       <td></td>
       <td>
         <span>😕</span>
@@ -56,7 +56,7 @@
       <td></td>
     </tr>
     <tr>
-      <td>Vue</th>
+      <td>Vue</td>
       <td></td>
       <td></td>
       <td>
@@ -133,10 +133,10 @@ Default: `null`
 Type: `String`  
 Default: `null`  
 id элемента-родителя для таблицы
-#### indexing  
+#### indexing
+*для мобильной версии*  
 Type: `Boolean`  
 Default: `false`  
-*для мобильной версии*   
 Добавляет аттрибут `data-index`    
 #### attributes
 Type: `Object`  
@@ -147,36 +147,36 @@ Type: `Boolean`
 Default: `false`  
 Не создавать таблицы без событий
 #### disableEmptyMobileTable
+*для мобильной версии* 
 Type: `Boolean`  
-Default: `false`  
-*для мобильной версии*   
+Default: `false`    
 Не создавать таблицы без событий
 #### disableEmptyRow
 Type: `Boolean`  
 Default: `false`  
 Не создавать строки без событий
 #### disableEmptyMobileRow
+*для мобильной версии*  
 Type: `Boolean`  
 Default: `false`  
-*для мобильной версии*  
 Не создавать строки без событий
 #### disableThead
 Type: `Boolean`  
 Default: `false`  
 Не создавать thead
 #### disableMobileThead
+*для мобильной версии*
 Type: `Boolean`  
-Default: `false`  
-*для мобильной версии*  
+Default: `false`    
 Не создавать thead
 #### disableFirstColumn
 Type: `Boolean`  
 Default: `false`  
 Не создавать первую колонку
 #### disableFirstMobileColumn
+*для мобильной версии*
 Type: `Boolean`  
-Default: `false`  
-*для мобильной версии*  
+Default: `false`    
 Не создавать первую колонку
 #### content
 Type: `String`  
@@ -233,21 +233,21 @@ browser viewport width <= '767px'
 <table data-index="0">
   <thead>
     <tr>
-      <td></th>
-      <td>Petr</th>
+      <td></td>
+      <td>Petr</td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Polymer</th>
+      <td>Polymer</td>
       <td></td>
     </tr>
     <tr>
-      <th>Vue</th>
+      <td>Vue</td>
       <td></td>
     </tr>
     <tr>
-      <td>React</th>
+      <td>React</td>
       <td></td>
     </tr>
   </tbody>
@@ -256,21 +256,21 @@ browser viewport width <= '767px'
 <table data-index="1">
   <thead>
   <tr>
-    <td></th>
-    <td>Ivan</th>
+    <td></td>
+    <td>Ivan</td>
   </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Polymer</th>
+      <td>Polymer</td>
       <td></td>
     </tr>
     <tr>
-      <td>Vue</th>
+      <td>Vue</td>
       <td></td>
     </tr>
     <tr>
-      <td>React</th>
+      <td>React</td>
       <td><span>😕</span></td>
     </tr>
   </tbody>
@@ -279,21 +279,21 @@ browser viewport width <= '767px'
 <table data-index="2">
   <thead>
     <tr>
-      <td></th>
-      <td>Anna</th>
+      <td></td>
+      <td>Anna</td>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Polymer</th>
+      <td>Polymer</td>
       <td></td>
     </tr>
     <tr>
-      <td>Vue</th>
+      <td>Vue</td>
       <td><span>😃</span></td>
     </tr>
     <tr>
-      <td>React</th>
+      <td>React</td>
       <td></td>
     </tr>
   </tbody>
