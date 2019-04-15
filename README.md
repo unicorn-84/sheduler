@@ -128,16 +128,16 @@ Type: `Object`
 #### breakpoint
 Type: `String`  
 Default: `null`     
-При ширине viewport браузера <= указанного значения таблица будет отображаться в мобильном режиме 
+При ширине viewport браузера <= указанного значения таблицы будут отображаться в мобильном режиме 
 #### container
 Type: `String`  
 Default: `null`  
 id элемента-родителя для таблицы
 #### indexing
-*для мобильной версии*  
 Type: `Boolean`  
 Default: `false`  
-Добавляет аттрибут `data-index`    
+Добавляет к таблицам аттрибут `data-index`  
+*для мобильной версии*    
 #### attributes
 Type: `Object`  
 Default: `{}`  
@@ -146,38 +146,38 @@ HTML аттрибуты для элемента
 Type: `Boolean`  
 Default: `false`  
 Не создавать таблицы без событий
-#### disableEmptyMobileTable
-*для мобильной версии* 
+#### disableEmptyMobileTable  
 Type: `Boolean`  
 Default: `false`    
-Не создавать таблицы без событий
+Не создавать таблицы без событий   
+*для мобильной версии* 
 #### disableEmptyRow
 Type: `Boolean`  
 Default: `false`  
 Не создавать строки без событий
-#### disableEmptyMobileRow
-*для мобильной версии*  
+#### disableEmptyMobileRow  
 Type: `Boolean`  
 Default: `false`  
-Не создавать строки без событий
+Не создавать строки без событий   
+*для мобильной версии*  
 #### disableThead
 Type: `Boolean`  
 Default: `false`  
 Не создавать thead
 #### disableMobileThead
-*для мобильной версии*
 Type: `Boolean`  
 Default: `false`    
-Не создавать thead
+Не создавать thead   
+*для мобильной версии*
 #### disableFirstColumn
 Type: `Boolean`  
 Default: `false`  
 Не создавать первую колонку
 #### disableFirstMobileColumn
-*для мобильной версии*
 Type: `Boolean`  
 Default: `false`    
-Не создавать первую колонку
+Не создавать первую колонку   
+*для мобильной версии*
 #### content
 Type: `String`  
 Default: `undefined`  
