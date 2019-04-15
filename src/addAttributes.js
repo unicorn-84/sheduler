@@ -1,4 +1,5 @@
 import each from 'lodash/each';
+import uniq from 'lodash/uniq';
 
 function addAttribute(el, attrs, parents) {
   if (el) {
@@ -26,6 +27,11 @@ function addAttribute(el, attrs, parents) {
           addAttribute(parent, item.attributes);
         }
       });
+    }
+
+    // удалим повторы
+    if (el.hasAttribute('class')) {
+      el.setAttribute('class', uniq(el.getAttribute('class').split(' ')).join(' '));
     }
   }
 
