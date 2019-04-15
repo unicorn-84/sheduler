@@ -11,7 +11,10 @@
     "rollup:watch": "rollup -c -w",
     "size": "size-limit",
     "test": "cross-env NODE_ENV=production mocha --opts mocha.opts",
-    "pretest": "npm run rollup:build"
+    "pretest": "npm run rollup:build",
+    "preversion": "npm test",
+    "version": "npm run rollup:build && git add -A build",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
