@@ -6,7 +6,7 @@ export default function createMobileTables(opts) {
   const fragment = document.createDocumentFragment();
 
   // проходим по массиву колонок
-  for (let i = 0; i < opts.table.columns.data.length; i += 1) {
+  for (let i = 0; i < opts.columns.data.length; i += 1) {
     // создаем элемент table
     const table = document.createElement('table');
     // проверяем пользовательские аттрибуты
@@ -41,7 +41,7 @@ export default function createMobileTables(opts) {
         addAttributes(tr, opts.table.thead.tr.attributes);
       }
       // проверяем массив строк
-      if (opts.table.rows.data.length > 0) {
+      if (opts.rows.data.length > 0) {
         // создаем элемент td
         const td = tr.insertCell(-1);
         // проверяем пользовательские аттрибуты
@@ -56,7 +56,7 @@ export default function createMobileTables(opts) {
         addAttributes(td, opts.table.thead.td.attributes);
       }
       // присваиваем значение из массива колонок элементу th
-      td.textContent = opts.table.columns.data[i];
+      td.textContent = opts.columns.data[i];
     }
 
     // TBODY
@@ -67,7 +67,7 @@ export default function createMobileTables(opts) {
       addAttributes(tbody, opts.table.tbody.attributes);
     }
     // проходим по массиву строк
-    for (let k = 0; k < opts.table.rows.data.length; k += 1) {
+    for (let k = 0; k < opts.rows.data.length; k += 1) {
       // создаем элемент tr
       const tr = tbody.insertRow(-1);
       // проверяем пользовательские аттрибуты
@@ -80,7 +80,7 @@ export default function createMobileTables(opts) {
         addAttributes(td, opts.table.tbody.td.attributes);
       }
       // присваиваем значение из массива строк элементу td
-      td.innerHTML = opts.table.rows.data[k];
+      td.innerHTML = opts.rows.data[k];
       // создаем элемент td
       td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
@@ -98,15 +98,15 @@ export default function createMobileTables(opts) {
   }
 
   // создаем empty 2d массив
-  let virtTables = Array.from(new Array(opts.table.columns.data.length),
-    () => Array.from(new Array(opts.table.rows.data.length), () => null));
+  let virtTables = Array.from(new Array(opts.columns.data.length),
+    () => Array.from(new Array(opts.rows.data.length), () => null));
 
   // EVENTS
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
     // проверяем наличие значений объекта события в массивах колонок и строк
-    const rowIndex = opts.table.rows.data.indexOf(opts.events[i].row);
-    const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
+    const rowIndex = opts.rows.data.indexOf(opts.events[i].row);
+    const columnIndex = opts.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
       // находим таблицу с совпавшим значением колонки
       const tables = fragment.querySelectorAll('table');

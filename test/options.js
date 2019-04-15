@@ -38,13 +38,6 @@ export default {
         content: '-',
       },
     },
-    columns: {
-      data: ['vlad', 'ivan', 'anna'],
-    },
-    rows: {
-      data: ['vue', 'polymer', 'react'],
-      sort: false,
-    },
   },
   disableEmptyTable: false,
   disableEmptyMobileTable: false,
@@ -54,6 +47,13 @@ export default {
   disableMobileThead: false,
   disableFirstColumn: false,
   disableFirstMobileColumn: false,
+  columns: {
+    data: ['vlad', 'ivan', 'anna'],
+  },
+  rows: {
+    data: ['vue', 'polymer', 'react'],
+    sort: false,
+  },
   events: [
     {
       attributes: {

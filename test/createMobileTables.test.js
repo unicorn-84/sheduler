@@ -75,14 +75,14 @@ suite('#createMobileTable()', () => {
       }
     });
     test('у td должен быть контент из columns', () => {
-      opts.table.rows.data = [];
+      opts.rows.data = [];
       const fragment = createMobileTables(opts);
       const tables = fragment.querySelectorAll('table');
       for (let i = 0; i < tables.length; i += 1) {
         const thead = tables[i].querySelector('thead');
         const tr = thead.querySelector('tr');
         const td = tr.querySelector('td');
-        assert.equal(td.outerHTML, `<td class="td">${opts.table.columns.data[i]}</td>`);
+        assert.equal(td.outerHTML, `<td class="td">${opts.columns.data[i]}</td>`);
       }
     });
     test('у tr должен быть первый пустой td, если есть rows', () => {
@@ -111,7 +111,7 @@ suite('#createMobileTable()', () => {
       for (let i = 0; i < tables.length; i += 1) {
         const thead = tables[i].querySelector('thead');
         const tr = thead.querySelector('tr');
-        assert.equal(tr.outerHTML, `<tr class="tr"><td class="td">${opts.table.columns.data[i]}</td></tr>`);
+        assert.equal(tr.outerHTML, `<tr class="tr"><td class="td">${opts.columns.data[i]}</td></tr>`);
       }
     });
   });
@@ -144,7 +144,7 @@ suite('#createMobileTable()', () => {
         const tbody = tables[i].querySelector('tbody');
         const trs = tbody.querySelectorAll('tr');
         for (let j = 0; j < trs.length; j += 1) {
-          assert.equal(trs[j].firstChild.outerHTML, `<td class="td">${opts.table.rows.data[j]}</td>`);
+          assert.equal(trs[j].firstChild.outerHTML, `<td class="td">${opts.rows.data[j]}</td>`);
         }
       }
     });

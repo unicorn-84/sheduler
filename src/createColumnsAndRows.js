@@ -3,8 +3,8 @@ import each from 'lodash/each';
 export default function createColumnsAndRows(opts) {
   // присваиваем массивы колонок и строк из пользовательских настроек
   const data = {
-    columns: opts.table.columns.data || [],
-    rows: opts.table.rows.data || [],
+    columns: opts.columns.data || [],
+    rows: opts.rows.data || [],
   };
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
@@ -22,7 +22,7 @@ export default function createColumnsAndRows(opts) {
   // проходим по массивам строк и колонок
   each(data, (value, key) => {
     // проверяем пользовательские настройки сортировки
-    if (opts.table[key].sort === true) {
+    if (opts[key].sort === true) {
       // сортируем строки
       data[key] = data[key].sort();
       // сортируем 'числовые' строки

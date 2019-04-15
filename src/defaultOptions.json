@@ -30,15 +30,15 @@
         "attributes": {},
         "content": null
       }
-    },
-    "columns": {
-      "data": [],
-      "sort": false
-    },
-    "rows": {
-      "data": [],
-      "sort": false
     }
+  },
+  "columns": {
+    "data": [],
+    "sort": false
+  },
+  "rows": {
+    "data": [],
+    "sort": false
   },
   "events": []
 }

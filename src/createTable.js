@@ -10,7 +10,7 @@ export default function createTable(opts) {
 
   // THEAD
   // проверяем массив колонок и disableThead
-  if (opts.disableThead !== true && opts.table.columns.data.length > 0) {
+  if (opts.disableThead !== true && opts.columns.data.length > 0) {
     // создаем элемент thead
     const thead = table.createTHead();
     // проверяем пользовательские аттрибуты
@@ -24,7 +24,7 @@ export default function createTable(opts) {
       addAttributes(tr, opts.table.thead.tr.attributes);
     }
     // проверяем массив строк и remove
-    if (opts.table.rows.data.length > 0 && !opts.table.tbody.td.remove) {
+    if (opts.rows.data.length > 0 && !opts.table.tbody.td.remove) {
       // создаем элемент td
       const td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
@@ -33,7 +33,7 @@ export default function createTable(opts) {
       }
     }
     // проходим по массиву колонок
-    for (let i = 0; i < opts.table.columns.data.length; i += 1) {
+    for (let i = 0; i < opts.columns.data.length; i += 1) {
       // создаем элемент td
       const td = tr.insertCell(-1);
       // проверяем пользовательские аттрибуты
@@ -41,13 +41,13 @@ export default function createTable(opts) {
         addAttributes(td, opts.table.thead.td.attributes);
       }
       // присваиваем значение из массива колонок элементу td
-      td.textContent = opts.table.columns.data[i];
+      td.textContent = opts.columns.data[i];
     }
   }
 
   // TBODY
   // проверяем массив строк
-  if (opts.table.rows.data.length > 0) {
+  if (opts.rows.data.length > 0) {
     // создаем элемент tbody
     const tbody = table.createTBody();
     // проверяем пользовательские аттрибуты
@@ -55,7 +55,7 @@ export default function createTable(opts) {
       addAttributes(tbody, opts.table.tbody.attributes);
     }
     // проходим по массиву строк
-    for (let i = 0; i < opts.table.rows.data.length; i += 1) {
+    for (let i = 0; i < opts.rows.data.length; i += 1) {
       // создаем элемент tr
       const tr = tbody.insertRow(-1);
       // проверяем пользовательские аттрибуты
@@ -71,10 +71,10 @@ export default function createTable(opts) {
           addAttributes(td, opts.table.tbody.td.attributes);
         }
         // присваиваем значение из массива строк элементу td
-        td.textContent = opts.table.rows.data[i];
+        td.textContent = opts.rows.data[i];
       }
       // проходим по массиву колонок
-      for (let j = 0; j < opts.table.columns.data.length; j += 1) {
+      for (let j = 0; j < opts.columns.data.length; j += 1) {
         // создаем элемент td
         const td = tr.insertCell(-1);
         // проверяем пользовательские аттрибуты
@@ -91,14 +91,14 @@ export default function createTable(opts) {
   }
 
   // создаем empty массив
-  const virtRows = Array.from(new Array(opts.table.rows.data.length), () => null);
+  const virtRows = Array.from(new Array(opts.rows.data.length), () => null);
 
   // EVENTS
   // проходим по массиву событий
   for (let i = 0; i < opts.events.length; i += 1) {
     // проверяем наличие значений объекта события в массивах колонок и строк
-    const rowIndex = opts.table.rows.data.indexOf(opts.events[i].row);
-    const columnIndex = opts.table.columns.data.indexOf(opts.events[i].column);
+    const rowIndex = opts.rows.data.indexOf(opts.events[i].row);
+    const columnIndex = opts.columns.data.indexOf(opts.events[i].column);
     if (rowIndex !== -1 && columnIndex !== -1) {
       const tbody = table.querySelector('tbody');
       if (tbody) {

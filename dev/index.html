@@ -6,6 +6,16 @@
   <title>Scheduler</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    table {
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+    table thead td:first-child {
+      width: 15%;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -22,67 +32,42 @@
     container: 'scheduler-container',
     table: {
       attributes: {
-        id: 'id',
-        class: 'table table-bordered table-dark',
-      },
-      thead: {
-        attributes: {
-          class: 'thead',
-        },
-        tr: {
-          attributes: {
-            class: 'tr',
-          },
-        },
-        td: {
-          attributes: {
-            class: 'td',
-          },
-        },
-        disable: false,
-        disableMobile: false,
-      },
-      tbody: {
-        attributes: {
-          class: 'tbody',
-        },
-        tr: {
-          attributes: {
-            class: 'tr',
-          },
-        },
-        td: {
-          attributes: {
-            class: 'td',
-          },
-          content: '-',
-        },
-      },
-      columns: {
-        data: ['vlad', 'ivan', 'anna'],
-      },
-      rows: {
-        data: ['vue', 'polymer', 'react'],
-        sort: false,
+        class: 'table table-bordered table-dark text-center align-middle',
       },
     },
-    disableEmptyTable: true,
-    disableEmptyMobileTable: true,
-    disableEmptyRow: true,
-    disableEmptyMobileRow: true,
-    disableThead: true,
-    disableMobileThead: true,
-    disableFirstColumn: true,
-    disableFirstMobileColumn: true,
+    rows: {
+      sort: true,
+    },
     events: [
       {
-        attributes: {
-          class: 'bg-dark',
-          'data-column': 'anna',
-        },
-        column: 'anna',
-        row: 'vue',
-        content: '+',
+        column: 'Январь',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Январь',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Февраль',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Февраль',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Март',
+        row: 'Анна',
+        content: Math.floor(Math.random() * 1000),
+      },
+      {
+        column: 'Март',
+        row: 'Иван',
+        content: Math.floor(Math.random() * 1000),
       },
     ],
   });

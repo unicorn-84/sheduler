@@ -45,12 +45,12 @@ suite('#createTable()', () => {
       }
     });
     test('у td должен быть контент из columns', () => {
-      opts.table.rows.data = [];
+      opts.rows.data = [];
       const thead = createTable(opts).querySelector('thead');
       const tr = thead.querySelector('tr');
       const tds = tr.querySelectorAll('td');
       for (let i = 0; i < tds.length; i += 1) {
-        assert.equal(tds[i].outerHTML, `<td class="td">${opts.table.columns.data[i]}</td>`);
+        assert.equal(tds[i].outerHTML, `<td class="td">${opts.columns.data[i]}</td>`);
       }
     });
     test('у tr должен быть первый пустой td, если есть rows', () => {
@@ -88,7 +88,7 @@ suite('#createTable()', () => {
       const tbody = createTable(opts).querySelector('tbody');
       const trs = tbody.querySelectorAll('tr');
       for (let i = 0; i < trs.length; i += 1) {
-        assert.equal(trs[i].firstChild.outerHTML, `<td class="td">${opts.table.rows.data[i]}</td>`);
+        assert.equal(trs[i].firstChild.outerHTML, `<td class="td">${opts.rows.data[i]}</td>`);
       }
     });
     test('у tr должны быть td', () => {

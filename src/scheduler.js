@@ -20,8 +20,8 @@ export default function scheduler(options) {
     return;
   }
   // присваиваем массивы колонок и строк
-  opts.table.columns.data = columns;
-  opts.table.rows.data = rows;
+  opts.columns.data = columns;
+  opts.rows.data = rows;
   // проверяем breakpoint
   let mql = {};
   if (opts.breakpoint && typeof opts.breakpoint === 'string') {
