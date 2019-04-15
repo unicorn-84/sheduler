@@ -117,6 +117,13 @@
       row: {String}
       content: {String}
       attributes: {Object}
+      parents: [
+        {
+          selector: {String},
+          attributes: {Object}
+        }
+        ...
+      ]
     }
     ...
   ]
@@ -194,6 +201,18 @@ Default: `false`
 Type: `Array`  
 Default: `[]`  
 Массив объектов событий
+#### column
+Type: `String`  
+Значение колонки для события
+#### row
+Type: `String`    
+Значение строки для события
+#### parents
+Type: `Array`  
+Массив объектов 
+#### selector
+Type: `String`  
+Селектор родительского элемента ячейки с событием
 ## Mobile version
 Если breakpoint определено, тогда при browser viewport width <= breakpoint, из каждой колонки будет создана отдельная таблица
 ```html

@@ -1,0 +1,142 @@
+[
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Понедельник",
+    "start": "09:00",
+    "end": "10:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Понедельник",
+    "start": "10:00",
+    "end": "11:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Среда",
+    "start": "09:00",
+    "end": "10:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Среда",
+    "start": "10:00",
+    "end": "11:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Пятница",
+    "start": "09:00",
+    "end": "10:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "yoga",
+      "title": "Йога"
+    },
+    "day": "Пятница",
+    "start": "10:00",
+    "end": "11:00",
+    "coach": {
+      "name": "anna",
+      "title": "Анна"
+    },
+    "color": "maroon"
+  },
+  {
+    "direction": {
+      "name": "stretching",
+      "title": "Stretching"
+    },
+    "day": "Вторник",
+    "start": "12:00",
+    "end": "13:00",
+    "coach": {
+      "name": "vasya",
+      "title": "Василий"
+    },
+    "color": "olive"
+  },
+  {
+    "direction": {
+      "name": "stretching",
+      "title": "Stretching"
+    },
+    "day": "Пятница",
+    "start": "16:00",
+    "end": "17:00",
+    "coach": {
+      "name": "vasya",
+      "title": "Василий"
+    },
+    "color": "olive"
+  },
+  {
+    "direction": {
+      "name": "stretching",
+      "title": "Stretching"
+    },
+    "day": "Суббота",
+    "start": "11:00",
+    "end": "12:00",
+    "coach": {
+      "name": "vasya",
+      "title": "Василий"
+    },
+    "color": "olive"
+  },
+  {
+    "direction": {
+      "name": "zumba",
+      "title": "Zumba"
+    },
+    "day": "Понедельник",
+    "start": "20:00",
+    "end": "21:00",
+    "coach": {
+      "name": "elena",
+      "title": "Елена"
+    },
+    "color": "blue"
+  }
+]

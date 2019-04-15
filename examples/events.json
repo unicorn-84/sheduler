@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Stretching",
+    "time": "09:00",
+    "day": "Monday"
+  },
+  {
+    "name": "Stretching",
+    "time": "10:00",
+    "day": "Monday"
+  },
+  {
+    "name": "Stretching",
+    "time": "09:00",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Stretching",
+    "time": "10:00",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Pole Dance",
+    "time": "11:00",
+    "day": "Monday"
+  },
+  {
+    "name": "Pole Dance",
+    "time": "11:00",
+    "day": "Tuesday"
+  },
+  {
+    "name": "Pole Dance",
+    "time": "11:00",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Pole Dance",
+    "time": "11:00",
+    "day": "Thursday"
+  },
+  {
+    "name": "Pole Dance",
+    "time": "11:00",
+    "day": "Friday"
+  },
+  {
+    "name": "Zumba",
+    "time": "18:00",
+    "day": "Thursday"
+  },
+  {
+    "name": "Zumba",
+    "time": "18:00",
+    "day": "Friday"
+  },
+  {
+    "name": "Zumba",
+    "time": "17:00",
+    "day": "Tuesday"
+  },
+  {
+    "name": "Zumba",
+    "time": "10:00",
+    "day": "Tuesday"
+  },
+  {
+    "name": "Yoga",
+    "time": "13:00",
+    "day": "Wednesday"
+  },
+  {
+    "name": "Yoga",
+    "time": "14:00",
+    "day": "Wednesday"
+  }
+]

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Scheduler</title>
+  <title>Dance Club</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
@@ -25,7 +25,7 @@
     </div>
   </div>
 </div>
-<script src="scheduler.js"></script>
+<script src="scheduler.min.js"></script>
 <script>
   window.scheduler({
     breakpoint: '991px',
@@ -35,39 +35,43 @@
         class: 'table table-bordered table-dark text-center align-middle',
       },
     },
+    columns: {
+      data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    },
     rows: {
+      data: ['09:00', '10:00', '11:00', '12:00'],
       sort: true,
     },
     events: [
       {
-        column: 'Январь',
-        row: 'Анна',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Monday',
+        row: '10:00',
+        content: 'Stretching',
       },
       {
-        column: 'Январь',
-        row: 'Иван',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Monday',
+        row: '11:00',
+        content: 'Zumba',
       },
       {
-        column: 'Февраль',
-        row: 'Анна',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Friday',
+        row: '10:00',
+        content: 'Super Sculpt',
       },
       {
-        column: 'Февраль',
-        row: 'Иван',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Wednesday',
+        row: '09:00',
+        content: 'Yoga',
       },
       {
-        column: 'Март',
-        row: 'Анна',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Wednesday',
+        row: '10:00',
+        content: 'Yoga',
       },
       {
-        column: 'Март',
-        row: 'Иван',
-        content: Math.floor(Math.random() * 1000),
+        column: 'Friday',
+        row: '12:00',
+        content: 'Pole Dance',
       },
     ],
   });

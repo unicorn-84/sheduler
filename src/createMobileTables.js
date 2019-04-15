@@ -126,6 +126,9 @@ export default function createMobileTables(opts) {
               if (opts.events[i].attributes) {
                 addAttributes(tds[1], opts.events[i].attributes);
               }
+              if (opts.events[i].parents) {
+                addAttributes(tds[1], null, opts.events[i].parents);
+              }
               // присваиваем значение события td
               tds[1].innerHTML = opts.events[i].content;
             }
