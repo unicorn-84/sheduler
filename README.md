@@ -6,14 +6,13 @@
 <script src="scheduler.min.js"></script>
 <script>
   window.scheduler({
-    container: 'scheduler-container',
-    table: {
-      columns: {
-        data: ['Petr', 'Ivan'],
-      },
-      rows: {
-        data: ['Polymer'],
-      },
+    container: 'container',
+    columns: {
+      data: ['Petr', 'Ivan'],
+    },
+    rows: {
+      data: ['Polymer'],
+      sort: true,
     },
     events: [
       {
@@ -23,7 +22,7 @@
       },
       {
         column: 'Ivan',
-        row: 'React',
+        row: 'Polymer',
         content: '<span>😕</span>',
       },
     ],
@@ -35,34 +34,34 @@
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th>Petr</th>
-      <th>Ivan</th>
-      <th>Anna</th>
+      <td></th>
+      <td>Petr</th>
+      <td>Ivan</th>
+      <td>Anna</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Polymer</th>
+      <td>Polymer</th>
       <td></td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <th>Vue</th>
-      <td></td>
-      <td></td>
-      <td>
-        <span>😃</span>
-      </td>
-    </tr>
-    <tr>
-      <th>React</th>
+      <td>React</th>
       <td></td>
       <td>
         <span>😕</span>
       </td>
       <td></td>
+    </tr>
+    <tr>
+      <td>Vue</th>
+      <td></td>
+      <td></td>
+      <td>
+        <span>😃</span>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -81,7 +80,7 @@
       tr: {
         attributes: {Object}
       }
-      th: {
+      td: {
         attributes: {Object}
       }
     }
@@ -89,27 +88,28 @@
       attributes: {Object}
       tr: {
         attributes: {Object}
-        removeEmpty: {Boolean}
-        removeEmptyMobile: {Boolean}
-      }
-      th: {
-        attributes: {Object}
-        remove: {Boolean}
-        removeMobile: {Boolean}
-      }
+      }  
       td: {
         attributes: {Object}
         content: {String}
       }
     }
-    columns: {
-      data: {Array}
-      sort: {Boolean}
-    }
-    rows: {
-      data: {Array}
-      sort: {Boolean}
-    }
+  }
+  disableEmptyTable: {Boolean},
+  disableEmptyMobileTable: {Boolean},
+  disableEmptyRow: {Boolean},
+  disableEmptyMobileRow: {Boolean},
+  disableThead: {Boolean},
+  disableMobileThead: {Boolean},
+  disableFirstColumn: {Boolean},
+  disableFirstMobileColumn: {Boolean},
+  columns: {
+    data: {Array}
+    sort: {Boolean}
+  }
+  rows: {
+    data: {Array}
+    sort: {Boolean}
   }
   events: [
     {
@@ -127,39 +127,57 @@
 Type: `Object`
 #### breakpoint
 Type: `String`  
-Default: `undefined`     
+Default: `null`     
 При ширине viewport браузера <= указанного значения таблица будет отображаться в мобильном режиме 
 #### container
 Type: `String`  
-Default: `scheduler-container`  
+Default: `null`  
 id элемента-родителя для таблицы
 #### indexing  
 Type: `Boolean`  
 Default: `false`  
-*только для мобильной версии*   
+*для мобильной версии*   
 Добавляет аттрибут `data-index`    
 #### attributes
 Type: `Object`  
 Default: `{}`  
 HTML аттрибуты для элемента
-#### removeEmpty
+#### disableEmptyTable
+Type: `Boolean`  
+Default: `false`  
+Не создавать таблицы без событий
+#### disableEmptyMobileTable
+Type: `Boolean`  
+Default: `false`  
+*для мобильной версии*   
+Не создавать таблицы без событий
+#### disableEmptyRow
 Type: `Boolean`  
 Default: `false`  
 Не создавать строки без событий
-#### removeEmptyMobile
+#### disableEmptyMobileRow
 Type: `Boolean`  
 Default: `false`  
-*только для мобильной версии*  
+*для мобильной версии*  
 Не создавать строки без событий
-#### remove
+#### disableThead
 Type: `Boolean`  
 Default: `false`  
-Не создавать заголовок строки
-#### removeMobile
+Не создавать thead
+#### disableMobileThead
 Type: `Boolean`  
 Default: `false`  
-*только для мобильной версии*  
-Не создавать заголовок строки
+*для мобильной версии*  
+Не создавать thead
+#### disableFirstColumn
+Type: `Boolean`  
+Default: `false`  
+Не создавать первую колонку
+#### disableFirstMobileColumn
+Type: `Boolean`  
+Default: `false`  
+*для мобильной версии*  
+Не создавать первую колонку
 #### content
 Type: `String`  
 Default: `undefined`  
@@ -184,6 +202,7 @@ Default: `[]`
 <script>
   window.scheduler({
     breakpoint: '767px',
+    container: 'container',
     indexing: true,
     table: {
       columns: {
@@ -214,13 +233,13 @@ browser viewport width <= '767px'
 <table data-index="0">
   <thead>
     <tr>
-      <th></th>
-      <th>Petr</th>
+      <td></th>
+      <td>Petr</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Polymer</th>
+      <td>Polymer</th>
       <td></td>
     </tr>
     <tr>
@@ -228,7 +247,7 @@ browser viewport width <= '767px'
       <td></td>
     </tr>
     <tr>
-      <th>React</th>
+      <td>React</th>
       <td></td>
     </tr>
   </tbody>
@@ -237,21 +256,21 @@ browser viewport width <= '767px'
 <table data-index="1">
   <thead>
   <tr>
-    <th></th>
-    <th>Ivan</th>
+    <td></th>
+    <td>Ivan</th>
   </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Polymer</th>
+      <td>Polymer</th>
       <td></td>
     </tr>
     <tr>
-      <th>Vue</th>
+      <td>Vue</th>
       <td></td>
     </tr>
     <tr>
-      <th>React</th>
+      <td>React</th>
       <td><span>😕</span></td>
     </tr>
   </tbody>
@@ -260,24 +279,24 @@ browser viewport width <= '767px'
 <table data-index="2">
   <thead>
     <tr>
-      <th></th>
-      <th>Anna</th>
+      <td></th>
+      <td>Anna</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Polymer</th>
+      <td>Polymer</th>
       <td></td>
     </tr>
     <tr>
-      <th>Vue</th>
+      <td>Vue</th>
       <td><span>😃</span></td>
     </tr>
     <tr>
-      <th>React</th>
+      <td>React</th>
       <td></td>
     </tr>
   </tbody>
 </table>
 ```
-## [Examples](https://github.com/unicorn-84/sheduler/tree/master/examples)
+### [Examples](https://github.com/unicorn-84/sheduler/tree/master/examples)
