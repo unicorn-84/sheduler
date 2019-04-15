@@ -43,6 +43,10 @@
         column: 'Январь',
         row: 'Анна',
         content: Math.floor(Math.random() * 1000),
+        parents: [
+          { selector: 'table', attributes: { class: 'has-event' } },
+          { selector: 'tr', attributes: { class: 'has-event' } }
+        ],
       },
       {
         column: 'Январь',

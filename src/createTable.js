@@ -114,6 +114,9 @@ export default function createTable(opts) {
             if (opts.events[i].attributes) {
               addAttributes(td, opts.events[i].attributes);
             }
+            if (opts.events[i].parents) {
+              addAttributes(td, null, opts.events[i].parents);
+            }
             // присваиваем значение события td
             td.innerHTML = opts.events[i].content;
           }
