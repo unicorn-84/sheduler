@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="RU-ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dance Club</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    table {
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 2px;
+    }
+    table thead td:first-child {
+      width: 25%;
+    }
+    @media (min-width: 992px) {
+      table thead td:first-child {
+        width: 10%;
+      }
+    }
+    table h5,
+    table h6 {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="scheduler" class="my-3"></div>
+    </div>
+  </div>
+</div>
+<script src="scheduler.min.js"></script>
+<script>
+  function createContent(direction, start, end, coach) {
+    return `<h5>${direction}</h5><div><small>${start}-${end}</small></div><h6>${coach}</h6>`;
+  }
+  function createEvents(json) {
+    return Array.from(new Array(json.length), (x, i) => {
+      return {
+        column: json[i].day,
+        row: json[i].start,
+        content: createContent(json[i].direction.title, json[i].start, json[i].end, json[i].coach.title),
+        attributes: {
+          class: 'p-3',
+          style: `text-align: left !important; background-color: ${json[i].color}`,
+        },
+        parents: [
+          { selector: 'tr', attributes: { class: `has-${json[i].direction.name} has-${json[i].coach.name}` } },
+          { selector: 'table', attributes: { class: `has-${json[i].direction.name} has-${json[i].coach.name}` } }
+        ],
+      }
+    });
+  }
+  const options = {
+    breakpoint: '991px',
+    container: 'scheduler',
+    disableFirstMobileColumn: true,
+    disableEmptyMobileTable: true,
+    disableEmptyMobileRow: true,
+    table: {
+      attributes: {
+        class: 'table table-bordered table-dark',
+      },
+      thead: {
+        td: {
+          attributes: {
+            class: 'font-weight-bold text-center align-middle',
+          },
+        },
+      },
+      tbody: {
+        td: {
+          attributes: {
+            class: 'text-center font-weight-bold align-middle'
+          }
+        }
+      }
+    },
+    columns: {
+      data: ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
+    },
+    rows: {
+      data: ['09:00'],
+      sort: true,
+    },
+  };
+  fetch('./data.json')
+    .then(response => response.json())
+    .then(json => {
+      return createEvents(json);
+    })
+    .then(events => {
+      options.events = events;
+      window.scheduler(options);
+    })
+    .catch(error => console.log(error));
+</script>
+</body>
+</html>

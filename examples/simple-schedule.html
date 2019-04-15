@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="RU-ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dance Club</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    table {
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+    table thead td:first-child {
+      width: 15%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="scheduler-container" class="my-3"></div>
+    </div>
+  </div>
+</div>
+<script src="scheduler.min.js"></script>
+<script>
+  window.scheduler({
+    breakpoint: '991px',
+    container: 'scheduler-container',
+    table: {
+      attributes: {
+        class: 'table table-bordered table-dark text-center align-middle',
+      },
+    },
+    columns: {
+      data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    },
+    rows: {
+      data: ['09:00', '10:00', '11:00', '12:00'],
+      sort: true,
+    },
+    events: [
+      {
+        column: 'Monday',
+        row: '10:00',
+        content: 'Stretching',
+      },
+      {
+        column: 'Monday',
+        row: '11:00',
+        content: 'Zumba',
+      },
+      {
+        column: 'Friday',
+        row: '10:00',
+        content: 'Super Sculpt',
+      },
+      {
+        column: 'Wednesday',
+        row: '09:00',
+        content: 'Yoga',
+      },
+      {
+        column: 'Wednesday',
+        row: '10:00',
+        content: 'Yoga',
+      },
+      {
+        column: 'Friday',
+        row: '12:00',
+        content: 'Pole Dance',
+      },
+    ],
+  });
+</script>
+</body>
+</html>

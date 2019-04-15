@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="RU-ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dance Club</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    table {
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 1px;
+    }
+    table thead td:first-child {
+      width: 15%;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div id="scheduler-container" class="my-3"></div>
+    </div>
+  </div>
+</div>
+<script src="scheduler.min.js"></script>
+<script>
+  fetch('./events.json')
+    .then(response => response.json())
+    .then(json => {
+      window.scheduler({
+        breakpoint: '991px',
+        container: 'scheduler-container',
+        disableEmptyMobileRow: true,
+        table: {
+          attributes: {
+            class: 'table table-bordered table-dark text-center',
+          },
+          tbody: {
+            td: {
+              attributes: {
+                class: 'align-middle'
+              }
+            }
+          }
+        },
+        columns: {
+          data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        },
+        rows: {
+          sort: true,
+        },
+        events: Array.from(new Array(json.length), (x, i) => {
+          return {
+            column: json[i].day,
+            row: json[i].time,
+            content: json[i].name,
+            attributes: {
+              class: 'font-italic text-uppercase p-4 h5'
+            },
+          }
+        }),
+      });
+    })
+    .catch(error => console.log(error));
+</script>
+</body>
+</html>
