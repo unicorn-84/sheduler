@@ -51,7 +51,7 @@
     "eslint": "^5.15.2",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "jsdom": "^14.0.0",
+    "jsdom": "^16.5.0",
     "mocha": "^6.0.2",
     "mq-polyfill": "^1.1.8",
     "npm-run-all": "^4.1.5",
